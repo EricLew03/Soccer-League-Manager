@@ -16,7 +16,7 @@ public class League {
     // MODIFIES : this
     // EFFECTS : add a new team into the league
     public void addTeam(Team team) {
-        this.teams.add(team);
+        teams.add(team);
     }
 
     // REQUIRES: number of team in the league >= 2

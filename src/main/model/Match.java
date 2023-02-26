@@ -1,80 +1,68 @@
 package model;
 
+import javax.xml.transform.Result;
+
 public class Match {
+    private Team homeTeam;
+    private Team awayTeam;
+    private int homeGoals;
+    private int awayGoals;
+    private Result result;
 
-    Team firstTeam;
-    Team secondTeam;
-    private int firstTeamScore;
-    private int secondTeamScore;
-
-    // REQUIRES: the 2 teams in the match must be different
-    /* EFFECTS: constructs a match between 2 teams,
-                with the score for both teams initialised as 0
-    */
-    public Match(Team firstTeam, Team secondTeam) {
-        this.firstTeam = firstTeam;
-        this.secondTeam = secondTeam;
-        this.firstTeamScore = 0;
-        this.secondTeamScore = 0;
+    public Match(Team homeTeam, Team awayTeam) {
+        this.homeTeam = homeTeam;
+        this.awayTeam = awayTeam;
+        this.homeGoals = 0;
+        this.awayGoals = 0;
+        this.result = null;
     }
 
-    // REQUIRES: the score for both team are >= 0
-    // MODIFIES: This
-    /* EFFECTS: produce the result of the match where
-                if the first team scores more goals, the result is set
-                to win for the team while the result of the other team
-                is set to lose vice versa for both teams
-                If the score for both team is the same, the result is a
-                draw for both teams
-    */
-    public void setScore(int team1Score, int team2Score) {
-        this.firstTeamScore = team1Score;
-        this.secondTeamScore = team2Score;
-        if (team1Score > team2Score) {
-            firstTeam.update(Team.Result.WIN);
-            secondTeam.update(Team.Result.LOSS);
-        } else if (team1Score < team2Score) {
-            firstTeam.update(Team.Result.LOSS);
-            secondTeam.update(Team.Result.WIN);
+    public void updateResult(int homeGoals, int awayGoals) {
+        this.homeGoals = homeGoals;
+        this.awayGoals = awayGoals;
+        if (homeGoals > awayGoals) {
+            homeTeam.updatePoints(Team.Result.WIN);
+            awayTeam.updatePoints(Team.Result.LOSS);
+        } else if (homeGoals < awayGoals) {
+            homeTeam.updatePoints(Team.Result.LOSS);
+            awayTeam.updatePoints(Team.Result.WIN);
         } else {
-            firstTeam.update(Team.Result.DRAW);
-            secondTeam.update(Team.Result.DRAW);
+            homeTeam.updatePoints(Team.Result.DRAW);
+            awayTeam.updatePoints(Team.Result.DRAW);
         }
     }
 
-    // EFFECTS : return the name of the team that scored more goals
-    //           if the score is similar for both team, return null
     public String getWinner() {
-        if (firstTeamScore > secondTeamScore) {
-            return firstTeam.getTeamName();
-        } else if (firstTeamScore < secondTeamScore) {
-            return secondTeam.getTeamName();
+        if (homeGoals > awayGoals) {
+            return homeTeam.getTeamName();
+        } else if (homeGoals < awayGoals) {
+            return awayTeam.getTeamName();
         } else {
             return null;
         }
     }
 
-    // EFFECTS : return the name of the first team
-    public String getTeam1() {
-        return firstTeam.getTeamName();
+    public Team getHomeTeam() {
+        return homeTeam;
     }
 
-    // EFFECTS : return the name of the second team
-    public String getTeam2() {
-        return secondTeam.getTeamName();
+    public String getHomeTeamName() {
+        return homeTeam.getTeamName();
     }
 
-
-    // EFFECTS : return the score of the first team
-    public int getTeam1Score() {
-        return firstTeamScore;
+    public Team getAwayTeam() {
+        return awayTeam;
     }
 
-    // EFFECTS : return the score of the second team
-    public int getTeam2Score() {
-        return secondTeamScore;
+    public String getAwayTeamName() {
+        return awayTeam.getTeamName();
     }
 
+    public int getHomeScore() {
+        return homeGoals;
+    }
 
-
+    public int getAwayScore() {
+        return awayGoals;
+    }
 }

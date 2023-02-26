@@ -3,19 +3,23 @@ package ui;
 import model.Match;
 import model.MatchRecords;
 import model.Team;
+import model.League;
 
 import java.util.Scanner;
 
-// Soccer League applicaton
+// Soccer League application
 public class SoccerLeague {
-    private Match match;
-    private MatchRecords matchrecords;
     private Team team;
+    private MatchRecords matchRecords;
+    private League league;
     private Scanner input;
-
 
     // EFFECTS: runs the soccer application
     public SoccerLeague() {
+        matchRecords = new MatchRecords();
+        league = new League();
+        input = new Scanner(System.in);
+        input.useDelimiter("\n");
         runLeague();
     }
 
@@ -25,14 +29,11 @@ public class SoccerLeague {
         boolean keepGoing = true;
         String command = null;
 
-        init();
-
         while (keepGoing) {
             displayMenu();
-            command = input.next();
-            command = command.toLowerCase();
+            command = input.next().toLowerCase();
 
-            if (command.equals("q")) {
+            if (command.equals("e")) {
                 keepGoing = false;
             } else {
                 processCommand(command);
@@ -40,39 +41,23 @@ public class SoccerLeague {
         }
 
         System.out.println("\nGoodbye!");
-
-
     }
 
     private void processCommand(String command) {
-        if (command.equals("m")) {
-            doMatch();
-        } else if (command.equals("t")) {
-            doTeam();
-        } else if (command.equals("l")) {
-            doLeague();
-        } else {
-            System.out.println("Selection not valid...");
+        switch (command) {
+            case "m":
+                doMatch();
+                break;
+            case "t":
+                doTeam();
+                break;
+            case "l":
+                doLeague();
+                break;
+            default:
+                System.out.println("Selection not valid...");
+                break;
         }
-    }
-
-    private void init() {
-        input = new Scanner(System.in);
-        input.useDelimiter("\n");
-
-    }
-
-
-
-
-
-    // EFFECTS: displays menu of options to user
-    private void displayMenu() {
-        System.out.println("\nSelect from:");
-        System.out.println("\tt -> team");
-        System.out.println("\tm -> match");
-        System.out.println("\tl -> league");
-        System.out.println("\tq -> quit");
     }
 
     private void doMatch() {
@@ -80,6 +65,44 @@ public class SoccerLeague {
         System.out.println("\ta -> add match");
         System.out.println("\tm -> match records");
         System.out.println("\tq -> quit");
+
+        String command = input.next().toLowerCase();
+        switch (command) {
+            case "a":
+                addMatch();
+                break;
+            case "m":
+                viewMatchRecords();
+                break;
+            case "q":
+                break;
+            default:
+                System.out.println("Selection not valid...");
+                break;
+        }
+    }
+
+    private void addMatch() {
+        System.out.println("Enter home team name:");
+        String homeTeamName = input.next();
+        System.out.println("Enter away team name:");
+        String awayTeamName = input.next();
+
+        Match match = new Match(matchRecords, homeTeamName, awayTeamName);
+        System.out.println("Enter home team goals:");
+        int homeTeamGoals = input.nextInt();
+        match.setHomeTeamGoals(homeTeamGoals);
+        System.out.println("Enter away team goals:");
+        int awayTeamGoals = input.nextInt();
+        match.setAwayTeamGoals(awayTeamGoals);
+
+        matchRecords.addMatch(match);
+        System.out.println("Match added successfully!");
+        league.getStandings();
+    }
+
+    private void viewMatchRecords() {
+        System.out.println(matchRecords.toString());
     }
 
     private void doTeam() {
@@ -88,16 +111,38 @@ public class SoccerLeague {
         System.out.println("\tt -> team record");
         System.out.println("\tl -> list of teams");
         System.out.println("\tq -> quit");
+
+        String command = input.next().toLowerCase();
+        switch (command) {
+            case "a":
+                league.addTeam(team);
+                break;
+            case "t":
+                viewTeamRecord();
+                break;
+            case "l":
+                viewTeamList();
+                break;
+            case "q":
+                break;
+            default:
+                System.out.println("Selection not valid...");
+                break;
+        }
     }
 
     private void doLeague() {
         System.out.println("\nSelect from:");
-        System.out.println("\ta -> add match");
-        System.out.println("\tm -> match records");
+        System.out.println("\tv -> view league standings");
         System.out.println("\tq -> quit");
+
+        String command = input.next().toLowerCase();
+        switch (command) {
+            case "v":
+                league.getStandings();
+                break;
+        }
     }
-
 }
-
 
 
