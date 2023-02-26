@@ -65,4 +65,9 @@ public class Match {
     public int getAwayScore() {
         return awayGoals;
     }
+
+    @Override
+    public String toString() {
+        return homeTeam.getTeamName() + " " + homeGoals + " - " + awayGoals + " " + awayTeam.getTeamName();
+    }
 }

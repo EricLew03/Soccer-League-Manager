@@ -4,7 +4,6 @@ import model.Match;
 import model.MatchRecords;
 import model.Team;
 import model.League;
-import model.ListOfTeams;
 
 import java.util.List;
 import java.util.Scanner;
@@ -62,13 +61,18 @@ public class SoccerLeague {
                 doTeam();
                 break;
             case "l":
-                league.getStandings();
+                List<String> standings = league.getStandings();
+                for (String row : standings) {
+                    System.out.println(row);
+                }
                 break;
             default:
                 System.out.println("Selection not valid...");
                 break;
         }
     }
+
+
 
     private void doMatch() {
         System.out.println("\nSelect from:");
@@ -168,12 +172,53 @@ public class SoccerLeague {
         System.out.println("Team added successfully!");
     }
 
-    public List<Team> viewTeamList() {
-        return league.getTeams();
+    public void viewTeamList() {
+        List<Team> teams = league.getTeams();
+        if (teams.isEmpty()) {
+            System.out.println("No teams found.");
+        } else {
+            System.out.println("List of teams:");
+            for (Team team : teams) {
+                System.out.println(team.getTeamName());
+            }
+        }
     }
 
-    public void viewTeamRecord(){
+    public void viewTeamRecord() {
+        List<Team> teams = league.getTeams();
+        if (teams.isEmpty()) {
+            System.out.println("No teams found.");
+        } else {
+            System.out.println("List of teams:");
+            for (Team team : teams) {
+                System.out.println(team.getTeamName());
+            }
+
+            System.out.println("Enter the name of the team to view its match records:");
+            String teamName = input.next();
+            Team selectedTeam = null;
+            for (Team team : teams) {
+                if (team.getTeamName().equalsIgnoreCase(teamName)) {
+                    selectedTeam = team;
+                    break;
+                }
+            }
+            if (selectedTeam == null) {
+                System.out.println("No team found with the name " + teamName);
+            } else {
+                List<Match> teamMatches = matchRecords.getMatchesForTeam(selectedTeam);
+                if (teamMatches.isEmpty()) {
+                    System.out.println("No match records found for team " + selectedTeam.getTeamName());
+                } else {
+                    System.out.println("Match records for team " + selectedTeam.getTeamName() + ":");
+                    for (Match match : teamMatches) {
+                        System.out.println(match.toString());
+                    }
+                }
+            }
+        }
     }
+
 }
 
 

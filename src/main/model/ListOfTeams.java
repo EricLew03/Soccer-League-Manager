@@ -18,4 +18,6 @@ public class ListOfTeams {
     public ArrayList<Team> getTeams() {
         return listOfTeams;
     }
+
+
 }

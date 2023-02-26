@@ -23,6 +23,16 @@ public class MatchRecords {
         return matchRecords;
     }
 
+    public List<Match> getMatchesForTeam(Team team) {
+        List<Match> matchesForTeam = new ArrayList<>();
+        for (Match match : matchRecords) {
+            if (match.getHomeTeam().equals(team) || match.getAwayTeam().equals(team)) {
+                matchesForTeam.add(match);
+            }
+        }
+        return matchesForTeam;
+    }
+
 
 
 

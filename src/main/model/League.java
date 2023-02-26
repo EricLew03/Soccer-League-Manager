@@ -19,26 +19,56 @@ public class League {
         teams.add(team);
     }
 
-    public ArrayList<Team> getTeams() {
-        return (ArrayList<Team>) teams;
+    public List<Team> getTeams() {
+        return teams;
     }
-
     // REQUIRES: number of team in the league >= 2
     // MODIFIES: This
     // EFFECTS: sort the teams in descending order based on the number of points they have
     //          in case, two teams have the same amount of points, the team with the higher
     //          number of wins is moved up.
-    public List<Team> getStandings() {
+
+    public List<String> getStandings() {
         Collections.sort(teams, (a, b) -> {
-            int pointsA = (a.getPoints());
-            int pointsB = (b.getPoints());
+            int pointsA = a.getPoints();
+            int pointsB = b.getPoints();
             if (pointsA != pointsB) {
                 return Integer.compare(pointsB, pointsA);
+            } else {
+                int winsA = a.getWins();
+                int winsB = b.getWins();
+                if (winsA != winsB) {
+                    return Integer.compare(winsB, winsA);
+                } else {
+                    int lossesA = a.getLosses();
+                    int lossesB = b.getLosses();
+                    if (lossesA != lossesB) {
+                        return Integer.compare(lossesA, lossesB);
+                    } else {
+                        int drawsA = a.getDraws();
+                        int drawsB = b.getDraws();
+                        if (drawsA != drawsB) {
+                            return Integer.compare(drawsB, drawsA);
+                        } else {
+                            return a.getTeamName().compareTo(b.getTeamName());
+                        }
+                    }
+                }
             }
-            return Integer.compare(b.getWins(), a.getWins());
         });
-        return teams;
+
+        List<String> standings = new ArrayList<>();
+        standings.add(String.format("%-20s%-10s%-10s%-10s%-10s", "Team", "Points", "Wins", "Losses", "Draws"));
+        for (Team team : teams) {
+            standings.add(String.format("%-20s%-10d%-10d%-10d%-10d",
+                    team.getTeamName(), team.getPoints(), team.getWins(),
+                    team.getLosses(), team.getDraws()));
+        }
+
+        return standings;
     }
+
+
 
 }
 
