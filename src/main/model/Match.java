@@ -32,6 +32,8 @@ public class Match {
         }
     }
 
+
+
     public String getWinner() {
         if (homeGoals > awayGoals) {
             return homeTeam.getTeamName();

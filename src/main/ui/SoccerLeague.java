@@ -97,12 +97,25 @@ public class SoccerLeague {
     }
 
     private void addMatch() {
-        System.out.println("Enter home team name:");
-        String homeTeamName = input.next();
-        Team homeTeam = new Team(homeTeamName);
-        System.out.println("Enter away team name:");
-        String awayTeamName = input.next();
-        Team awayTeam = new Team(awayTeamName);
+        List<Team> teams = league.getTeams();
+
+        // Check that there are at least two teams in the league
+        if (teams.size() < 2) {
+            System.out.println("There must be at least two teams in the league to add a match.");
+            return;
+        }
+
+        System.out.println("Select home team:");
+        Team homeTeam = selectTeam();
+        System.out.println("Select away team:");
+
+        Team awayTeam = null;
+        while (awayTeam == null || awayTeam == homeTeam) {
+            awayTeam = selectTeam();
+            if (awayTeam == homeTeam) {
+                System.out.println("The away team cannot be the same as the home team. Please select a different team.");
+            }
+        }
 
         Match match = new Match(homeTeam, awayTeam);
 
@@ -123,6 +136,28 @@ public class SoccerLeague {
 
         matchRecords.addMatch(match);
         System.out.println("Match added successfully!");
+    }
+
+    private Team selectTeam() {
+        List<Team> teams = league.getTeams();
+        for (int i = 0; i < teams.size(); i++) {
+            System.out.println(i + 1 + ": " + teams.get(i).getTeamName());
+        }
+
+        int selection = -1;
+        while (selection < 0 || selection >= teams.size()) {
+            try {
+                selection = input.nextInt() - 1;
+                if (selection < 0 || selection >= teams.size()) {
+                    System.out.println("Invalid selection, please enter a number between 1 and " + teams.size());
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid input, please enter a number");
+                input.next();
+            }
+        }
+
+        return teams.get(selection);
     }
 
     private void viewMatchRecords() {
