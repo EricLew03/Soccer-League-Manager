@@ -4,12 +4,11 @@ import model.Match;
 import model.MatchRecords;
 import model.Team;
 import model.League;
-
+import model.ListOfTeams;
 import java.util.Scanner;
 
 // Soccer League application
 public class SoccerLeague {
-    private Team team;
     private MatchRecords matchRecords;
     private League league;
     private Scanner input;
@@ -43,6 +42,15 @@ public class SoccerLeague {
         System.out.println("\nGoodbye!");
     }
 
+    private void displayMenu() {
+        System.out.println("\nSelect from:");
+        System.out.println("\tm -> match options");
+        System.out.println("\tt -> team options");
+        System.out.println("\tl -> league options");
+        System.out.println("\te -> exit");
+        System.out.print("Enter your selection: ");
+    }
+
     private void processCommand(String command) {
         switch (command) {
             case "m":
@@ -52,7 +60,7 @@ public class SoccerLeague {
                 doTeam();
                 break;
             case "l":
-                doLeague();
+                league.getStandings();
                 break;
             default:
                 System.out.println("Selection not valid...");
@@ -85,26 +93,31 @@ public class SoccerLeague {
     private void addMatch() {
         System.out.println("Enter home team name:");
         String homeTeamName = input.next();
+        Team homeTeam = new Team(homeTeamName);
         System.out.println("Enter away team name:");
         String awayTeamName = input.next();
+        Team awayTeam = new Team(awayTeamName);
 
-        Match match = new Match(matchRecords, homeTeamName, awayTeamName);
-        System.out.println("Enter home team goals:");
-        int homeTeamGoals = input.nextInt();
-        match.setHomeTeamGoals(homeTeamGoals);
-        System.out.println("Enter away team goals:");
-        int awayTeamGoals = input.nextInt();
-        match.setAwayTeamGoals(awayTeamGoals);
+        Match match = new Match(homeTeam, awayTeam);
+
+        boolean validInput = false;
+        while (!validInput) {
+            try {
+                System.out.println("Enter home team goals:");
+                int homeTeamGoals = input.nextInt();
+                System.out.println("Enter away team goals:");
+                int awayTeamGoals = input.nextInt();
+                match.updateResult(homeTeamGoals, awayTeamGoals);
+                validInput = true;
+            } catch (Exception e) {
+                System.out.println("Invalid input, please enter an integer");
+                input.next();
+            }
+        }
 
         matchRecords.addMatch(match);
         System.out.println("Match added successfully!");
-        league.getStandings();
     }
-
-    private void viewMatchRecords() {
-        System.out.println(matchRecords.toString());
-    }
-
     private void doTeam() {
         System.out.println("\nSelect from:");
         System.out.println("\ta -> add Team");
@@ -115,7 +128,7 @@ public class SoccerLeague {
         String command = input.next().toLowerCase();
         switch (command) {
             case "a":
-                league.addTeam(team);
+                addTeam();
                 break;
             case "t":
                 viewTeamRecord();
@@ -131,18 +144,29 @@ public class SoccerLeague {
         }
     }
 
-    private void doLeague() {
-        System.out.println("\nSelect from:");
-        System.out.println("\tv -> view league standings");
-        System.out.println("\tq -> quit");
+    private void addTeam() {
+        System.out.println("Enter the name of the new team:");
+        String teamName = input.next();
+        Team newTeam = new Team(teamName);
+        league.addTeam(newTeam);
+        System.out.println("Team added successfully!");
+    }
 
-        String command = input.next().toLowerCase();
-        switch (command) {
-            case "v":
-                league.getStandings();
-                break;
+    private void viewTeamList() {
+        System.out.println("\nTeams:");
+        for (Team team : league.getTeams().getTeams()) {
+            System.out.println("\t" + team.getTeamName());
+        }
+
+        System.out.println("Enter team name:");
+        String teamName = input.next();
+
+        Team team = league.getTeams().getTeamName(teamName);
+        if (team != null) {
+            System.out.println(team.toString());
+        } else {
+            System.out.println("Team not found...");
         }
     }
-}
 
 

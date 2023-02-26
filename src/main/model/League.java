@@ -19,6 +19,10 @@ public class League {
         teams.add(team);
     }
 
+    public ArrayList<Team> getTeams() {
+        return teams.getTeams();
+    }
+
     // REQUIRES: number of team in the league >= 2
     // MODIFIES: This
     // EFFECTS: sort the teams in descending order based on the number of points they have
