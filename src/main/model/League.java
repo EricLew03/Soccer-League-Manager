@@ -20,7 +20,7 @@ public class League {
     }
 
     public ArrayList<Team> getTeams() {
-        return teams.getTeams();
+        return (ArrayList<Team>) teams;
     }
 
     // REQUIRES: number of team in the league >= 2

@@ -5,6 +5,8 @@ import model.MatchRecords;
 import model.Team;
 import model.League;
 import model.ListOfTeams;
+
+import java.util.List;
 import java.util.Scanner;
 
 // Soccer League application
@@ -118,6 +120,20 @@ public class SoccerLeague {
         matchRecords.addMatch(match);
         System.out.println("Match added successfully!");
     }
+
+    private void viewMatchRecords() {
+        List<Match> matchRecords2 = matchRecords.getMatchRecords();
+
+        if (matchRecords2.isEmpty()) {
+            System.out.println("No match records found.");
+        } else {
+            System.out.println("Match records:");
+            for (Match match : matchRecords2) {
+                System.out.println(match.toString());
+            }
+        }
+    }
+
     private void doTeam() {
         System.out.println("\nSelect from:");
         System.out.println("\ta -> add Team");
@@ -152,21 +168,12 @@ public class SoccerLeague {
         System.out.println("Team added successfully!");
     }
 
-    private void viewTeamList() {
-        System.out.println("\nTeams:");
-        for (Team team : league.getTeams().getTeams()) {
-            System.out.println("\t" + team.getTeamName());
-        }
-
-        System.out.println("Enter team name:");
-        String teamName = input.next();
-
-        Team team = league.getTeams().getTeamName(teamName);
-        if (team != null) {
-            System.out.println(team.toString());
-        } else {
-            System.out.println("Team not found...");
-        }
+    public List<Team> viewTeamList() {
+        return league.getTeams();
     }
+
+    public void viewTeamRecord(){
+    }
+}
 
 
