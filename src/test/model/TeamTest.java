@@ -339,5 +339,75 @@ public class TeamTest {
     }
 
 
+    @Test
+    public void testWin() {
+        team.win();
+        assertEquals(3, team.getPoints());
+        assertEquals(1, team.getWins());
+    }
 
+    @Test
+    public void testLose() {
+        team.lose();
+        assertEquals(0, team.getPoints());
+        assertEquals(0, team.getWins());
+        assertEquals(1, team.getLosses());
+    }
+
+    @Test
+    public void testDraw() {
+        team.draw();
+        assertEquals(1, team.getPoints());
+        assertEquals(0, team.getWins());
+        assertEquals(0, team.getLosses());
+        assertEquals(1, team.getDraws());
+    }
+
+    @Test
+    void testGetTeamName() {
+        assertEquals("A", team.getTeamName());
+    }
+
+    @Test
+    void testGetMatchesPlayed() {
+        team.updatePoints(Team.Result.WIN);
+        team.updatePoints(Team.Result.WIN);
+        assertEquals(2, team.getMatchesPlayed());
+    }
+
+    @Test
+    void testGetPoints() {
+        team.updatePoints(Team.Result.WIN);
+        team.updatePoints(Team.Result.DRAW);
+        team.updatePoints(Team.Result.LOSS);
+       assertEquals(4, team.getPoints());
+    }
+
+    @Test
+    void testGetWins() {
+        team.updatePoints(Team.Result.WIN);
+        team.updatePoints(Team.Result.DRAW);
+        team.updatePoints(Team.Result.LOSS);
+    assertEquals(1, team.getWins());
+    }
+
+    @Test
+    void testGetLosses() {
+        team.updatePoints(Team.Result.WIN);
+        team.updatePoints(Team.Result.DRAW);
+        team.updatePoints(Team.Result.WIN);
+       assertEquals(0, team.getLosses());
+    }
+
+    @Test
+    void testGetDraws() {
+        team.updatePoints(Team.Result.WIN);
+        team.updatePoints(Team.Result.DRAW);
+        team.updatePoints(Team.Result.LOSS);
+        assertEquals(1, team.getDraws());
+    }
 }
+
+
+
+

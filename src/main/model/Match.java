@@ -49,16 +49,6 @@ public class Match {
         return awayTeam;
     }
 
-    public int getHomeGoals() {
-        return homeGoals;
-    }
-
-    public int getAwayGoals() {
-        return awayGoals;
-    }
-
-
-
     // EFFECTS: Returns a string representation of the match
     @Override
     public String toString() {
