@@ -36,5 +36,15 @@ were lost, and **updating the league standing was challenging**.
 
 * As a user, I want to be able to *select a team and view its complete match history*.
 
+* As a user, I want to be able to *view all the matches recorded and all the teams added to the league*.
+
 
 * As a user, I want to be able to *create a league standing to see how many points each team has*.
+
+
+## Reference 
+Used code from Teller application to develop my UI
+https://github.students.cs.ubc.ca/CPSC210/TellerApp
+
+Learned how to create the league table format from stackoverflow
+https://stackoverflow.com/questions/61115674/java-how-to-create-basic-text-entry-and-output-for-football-league-standings

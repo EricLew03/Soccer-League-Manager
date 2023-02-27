@@ -10,6 +10,8 @@ public class Match {
     private Result result;
 
     // EFFECTS: Constructs a match with a given home team and away team
+    //          goals for home and away team is initialised as 0
+    //          result = null
     public Match(Team homeTeam, Team awayTeam) {
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;

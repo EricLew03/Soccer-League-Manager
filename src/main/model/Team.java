@@ -9,7 +9,7 @@ public class Team {
     private int points;
 
     public enum Result {
-        WIN, LOSS, DRAW;
+        WIN, LOSS, DRAW
     }
 
     // EFFECTS: constructs a new Team object with the given team name
@@ -39,9 +39,6 @@ public class Team {
                 break;
         }
     }
-
-
-
 
 
     // MODIFIES: this
