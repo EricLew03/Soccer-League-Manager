@@ -410,11 +410,8 @@ public class TeamTest {
         assertEquals(1, team.getDraws());
     }
 
-
     @Test
-    void testUpdatePointsNull() {
-        assertThrows(NullPointerException.class, () -> {
-            team.updatePoints(null);
-        });
+    void testUpdatePointsWithNullResult() {
+        assertThrows(NullPointerException.class, () -> team.updatePoints(null));
     }
 }
