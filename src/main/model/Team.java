@@ -26,6 +26,9 @@ public class Team {
     // MODIFIES: this
     // EFFECTS: updates the team's record based on the given result
     public void updatePoints(Result result) throws IllegalArgumentException {
+        if (result == null) {
+            throw new IllegalArgumentException("Result cannot be null.");
+        }
         this.matchesPlayed++;
         switch (result) {
             case WIN:
@@ -37,9 +40,12 @@ public class Team {
             case DRAW:
                 this.draw();
                 break;
-
         }
     }
+
+
+
+
 
     // MODIFIES: this
     // EFFECTS: increments the number of wins and points

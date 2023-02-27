@@ -408,6 +408,23 @@ public class TeamTest {
         assertEquals(1, team.getDraws());
     }
 
+    @Test
+    public void testUpdatePointsInvalidResult() {
+        try {
+            team.updatePoints(null);
+            fail("Expected IllegalArgumentException was not thrown");
+        } catch (IllegalArgumentException e) {
+            // expected
+        }
+
+        assertEquals(0, team.getWins());
+        assertEquals(0, team.getLosses());
+        assertEquals(0, team.getDraws());
+        assertEquals(0, team.getPoints());
+        assertEquals(0, team.getMatchesPlayed());
+    }
+
+
 
 }
 
