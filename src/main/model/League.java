@@ -47,15 +47,13 @@ public class League {
                 }
             }
         });
-
         List<String> standings = new ArrayList<>();
-        standings.add(String.format("%-25s%-10s%-10s%-10s%-10s", "Team", "Matches", "Points", "Wins", "Losses"));
+        standings.add(String.format("%-25s%-10s%-10s%-10s%-10s%-10s", "Team", "Matches",
+                "Points", "Wins", "Losses","Draws"));
         for (Team team : league) {
-            standings.add(String.format("%-25s%-10d%-10d%-10d%-10d",
-                    team.getTeamName(),team.getMatchesPlayed(),
-                    team.getPoints(), team.getWins(), team.getLosses()));
+            standings.add(String.format("%-25s%-10d%-10d%-10d%-10d%-10d", team.getTeamName(),team.getMatchesPlayed(),
+                    team.getPoints(), team.getWins(), team.getLosses(),team.getDraws()));
         }
-
         return standings;
     }
 }

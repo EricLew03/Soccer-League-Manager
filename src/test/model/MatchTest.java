@@ -1,7 +1,6 @@
 package model;
 
-import model.Match;
-import model.Team;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
