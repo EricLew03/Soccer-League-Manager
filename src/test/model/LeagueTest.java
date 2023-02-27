@@ -61,4 +61,47 @@ public class LeagueTest {
 
         assertEquals(expectedStandings, league.getStandings());
     }
+
+    @Test
+    public void testSamePoints() {
+        Match match1 = new Match(team1, team2);
+        Match match2 = new Match(team2, team3);
+        Match match3 = new Match(team3, team2);
+        Match match4 = new Match(team2, team3);
+
+        match1.updateResult(1, 0);
+        match2.updateResult(1, 1);
+        match3.updateResult(1, 1);
+        match4.updateResult(1, 1);
+
+
+        List<String> expectedStandings = new ArrayList<>();
+        expectedStandings.add(String.format("%-25s%-10s%-10s%-10s%-10s%-10s", "Team", "Matches", "Points", "Wins",
+                "Losses", "Draws"));
+        expectedStandings.add(String.format("%-25s%-10d%-10d%-10d%-10d%-10d", "Team 1", 1, 3, 1, 0, 0));
+        expectedStandings.add(String.format("%-25s%-10d%-10d%-10d%-10d%-10d", "Team 2", 4, 3, 0, 1, 3));
+        expectedStandings.add(String.format("%-25s%-10d%-10d%-10d%-10d%-10d", "Team 3", 3, 3, 0, 0, 3));
+
+        assertEquals(expectedStandings, league.getStandings());
+    }
+
+    @Test
+    public void testSameWinsPoints() {
+        Match match1 = new Match(team1, team2);
+        Match match2 = new Match(team2, team3);
+        Match match3 = new Match(team3, team1);
+
+        match1.updateResult(0, 0);
+        match2.updateResult(0, 0);
+        match3.updateResult(0, 0);
+
+        List<String> expectedStandings = new ArrayList<>();
+        expectedStandings.add(String.format("%-25s%-10s%-10s%-10s%-10s%-10s", "Team", "Matches", "Points", "Wins",
+                "Losses","Draws"));
+        expectedStandings.add(String.format("%-25s%-10d%-10d%-10d%-10d%-10d", "Team 1", 2, 2, 0, 0, 2));
+        expectedStandings.add(String.format("%-25s%-10d%-10d%-10d%-10d%-10d", "Team 2", 2, 2, 0, 0, 2));
+        expectedStandings.add(String.format("%-25s%-10d%-10d%-10d%-10d%-10d", "Team 3", 2, 2, 0, 0, 2));
+
+        assertEquals(expectedStandings, league.getStandings());
+    }
 }

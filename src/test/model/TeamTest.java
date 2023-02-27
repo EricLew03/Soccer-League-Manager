@@ -1,9 +1,10 @@
 package model;
 
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class TeamTest {
@@ -406,6 +407,8 @@ public class TeamTest {
         team.updatePoints(Team.Result.LOSS);
         assertEquals(1, team.getDraws());
     }
+
+
 }
 
 
