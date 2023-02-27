@@ -9,6 +9,7 @@ public class Match {
     private int awayGoals;
     private Result result;
 
+    // EFFECTS: Constructs a match with a given home team and away team
     public Match(Team homeTeam, Team awayTeam) {
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
@@ -17,6 +18,10 @@ public class Match {
         this.result = null;
     }
 
+    // REQUIRES: homeGoals and awayGoals are non-negative integers
+    // MODIFIES: this, homeTeam, awayTeam
+    // EFFECTS: Updates the result of the match and updates the points
+    // of the home and away teams accordingly
     public void updateResult(int homeGoals, int awayGoals) {
         this.homeGoals = homeGoals;
         this.awayGoals = awayGoals;
@@ -34,40 +39,27 @@ public class Match {
 
 
 
-    public String getWinner() {
-        if (homeGoals > awayGoals) {
-            return homeTeam.getTeamName();
-        } else if (homeGoals < awayGoals) {
-            return awayTeam.getTeamName();
-        } else {
-            return null;
-        }
-    }
-
+    // EFFECTS : Returns the home team
     public Team getHomeTeam() {
         return homeTeam;
     }
 
-    public String getHomeTeamName() {
-        return homeTeam.getTeamName();
-    }
-
+    // EFFECTS: Returns the away team
     public Team getAwayTeam() {
         return awayTeam;
     }
 
-    public String getAwayTeamName() {
-        return awayTeam.getTeamName();
-    }
-
-    public int getHomeScore() {
+    public int getHomeGoals() {
         return homeGoals;
     }
 
-    public int getAwayScore() {
+    public int getAwayGoals() {
         return awayGoals;
     }
 
+
+
+    // EFFECTS: Returns a string representation of the match
     @Override
     public String toString() {
         return homeTeam.getTeamName() + " " + homeGoals + " - " + awayGoals + " " + awayTeam.getTeamName();

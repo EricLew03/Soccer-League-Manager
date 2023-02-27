@@ -1,28 +1,29 @@
 package model;
 
-import javax.lang.model.element.Name;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MatchRecords {
     private List<Match> matchRecords;
 
-    // EFFECTS : construct a list of all the match that occurred
+    // EFFECTS: constructs an empty list of matches
     public MatchRecords() {
         this.matchRecords = new ArrayList<>();
     }
 
-    // MODIFIES : this
-    // EFFECTS : add a new match to the list of match
+    // MODIFIES: this
+    // EFFECTS: adds the given match to the list of matches
     public void addMatch(Match match) {
         matchRecords.add(match);
     }
 
-    // EFFECTS : return the match records
+    // EFFECTS: returns the list of matches
     public List<Match> getMatchRecords() {
         return matchRecords;
     }
 
+    // EFFECTS: returns a list of all matches involving the given team
     public List<Match> getMatchesForTeam(Team team) {
         List<Match> matchesForTeam = new ArrayList<>();
         for (Match match : matchRecords) {
@@ -32,8 +33,4 @@ public class MatchRecords {
         }
         return matchesForTeam;
     }
-
-
-
-
 }

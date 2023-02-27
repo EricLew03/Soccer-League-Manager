@@ -14,7 +14,7 @@ public class SoccerLeague {
     private League league;
     private Scanner input;
 
-    // EFFECTS: runs the soccer application
+    // EFFECTS: runs the soccer league application
     public SoccerLeague() {
         matchRecords = new MatchRecords();
         league = new League();
@@ -24,7 +24,7 @@ public class SoccerLeague {
     }
 
     // MODIFIES: this
-    // EFFECTS: processes user input
+    // EFFECTS: processes user input and executes corresponding commands
     private void runLeague() {
         boolean keepGoing = true;
         String command = null;
@@ -43,6 +43,8 @@ public class SoccerLeague {
         System.out.println("\nGoodbye!");
     }
 
+
+    // EFFECTS: displays the menu
     private void displayMenu() {
         System.out.println("\nSelect from:");
         System.out.println("\tm -> match options");
@@ -52,6 +54,8 @@ public class SoccerLeague {
         System.out.print("Enter your selection: ");
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes user input
     private void processCommand(String command) {
         switch (command) {
             case "m":
@@ -74,6 +78,8 @@ public class SoccerLeague {
 
 
 
+    // MODIFIES: this
+    // EFFECTS: allows the user to manage match options
     private void doMatch() {
         System.out.println("\nSelect from:");
         System.out.println("\ta -> add match");
@@ -96,6 +102,8 @@ public class SoccerLeague {
         }
     }
 
+    // MODIFIES: this, matchRecords
+    // EFFECTS: allows the user to add a new match
     private void addMatch() {
         List<Team> teams = league.getTeams();
 
@@ -105,20 +113,42 @@ public class SoccerLeague {
             return;
         }
 
-        System.out.println("Select home team:");
-        Team homeTeam = selectTeam();
-        System.out.println("Select away team:");
+        Team homeTeam = selectHomeTeam();
+        Team awayTeam = selectAwayTeam(homeTeam);
+        Match match = createMatch(homeTeam, awayTeam);
+        updateMatchResult(match);
+        matchRecords.addMatch(match);
+        System.out.println("Match added successfully!");
+    }
 
+    // EFFECTS: Prompt the user to select a home team and returns the selected team.
+    private Team selectHomeTeam() {
+        System.out.println("Select home team:");
+        return selectTeam();
+    }
+
+    // EFFECTS: Prompt the user to select an away team and returns the selected team.
+    private Team selectAwayTeam(Team homeTeam) {
+        System.out.println("Select away team:");
         Team awayTeam = null;
         while (awayTeam == null || awayTeam == homeTeam) {
             awayTeam = selectTeam();
             if (awayTeam == homeTeam) {
-                System.out.println("The away team cannot be the same as the home team. Please select a different team.");
+                System.out.println("The away team cannot be the same as the home team."
+                        + " Please select a different team.");
             }
         }
+        return awayTeam;
+    }
 
-        Match match = new Match(homeTeam, awayTeam);
+    // EFFECTS: Creates a new Match with the given home and away teams and returns it.
+    private Match createMatch(Team homeTeam, Team awayTeam) {
+        return new Match(homeTeam, awayTeam);
+    }
 
+    // EFFECTS: Enter the home and away team goals for the given match,
+    //          and updates the match result accordingly.
+    private void updateMatchResult(Match match) {
         boolean validInput = false;
         while (!validInput) {
             try {
@@ -133,11 +163,9 @@ public class SoccerLeague {
                 input.next();
             }
         }
-
-        matchRecords.addMatch(match);
-        System.out.println("Match added successfully!");
     }
 
+    // EFFECTS: prompts the user to select a team from the league
     private Team selectTeam() {
         List<Team> teams = league.getTeams();
         for (int i = 0; i < teams.size(); i++) {
@@ -160,6 +188,7 @@ public class SoccerLeague {
         return teams.get(selection);
     }
 
+    // EFFECTS: displays the match records
     private void viewMatchRecords() {
         List<Match> matchRecords2 = matchRecords.getMatchRecords();
 
@@ -173,6 +202,7 @@ public class SoccerLeague {
         }
     }
 
+    // EFFECTS: displays the team options menu
     private void doTeam() {
         System.out.println("\nSelect from:");
         System.out.println("\ta -> add Team");
@@ -199,6 +229,8 @@ public class SoccerLeague {
         }
     }
 
+    // MODIFIES: this, league
+    // EFFECTS: prompts the user to add a new team to the league
     private void addTeam() {
         System.out.println("Enter the name of the new team:");
         String teamName = input.next();
@@ -207,51 +239,63 @@ public class SoccerLeague {
         System.out.println("Team added successfully!");
     }
 
+    // EFFECTS: Displays all the teams in the league
     public void viewTeamList() {
         List<Team> teams = league.getTeams();
         if (teams.isEmpty()) {
             System.out.println("No teams found.");
         } else {
-            System.out.println("List of teams:");
-            for (Team team : teams) {
-                System.out.println(team.getTeamName());
-            }
+            displayTeamList(teams);
         }
     }
 
+    // EFFECTS: Displays the match record of a specific team in the league
     public void viewTeamRecord() {
         List<Team> teams = league.getTeams();
         if (teams.isEmpty()) {
             System.out.println("No teams found.");
-        } else {
-            System.out.println("List of teams:");
-            for (Team team : teams) {
-                System.out.println(team.getTeamName());
-            }
+            return;
+        }
 
-            System.out.println("Enter the name of the team to view its match records:");
-            String teamName = input.next();
-            Team selectedTeam = null;
-            for (Team team : teams) {
-                if (team.getTeamName().equalsIgnoreCase(teamName)) {
-                    selectedTeam = team;
-                    break;
-                }
-            }
-            if (selectedTeam == null) {
-                System.out.println("No team found with the name " + teamName);
-            } else {
-                List<Match> teamMatches = matchRecords.getMatchesForTeam(selectedTeam);
-                if (teamMatches.isEmpty()) {
-                    System.out.println("No match records found for team " + selectedTeam.getTeamName());
-                } else {
-                    System.out.println("Match records for team " + selectedTeam.getTeamName() + ":");
-                    for (Match match : teamMatches) {
-                        System.out.println(match.toString());
-                    }
-                }
+        displayTeamList(teams);
+
+        System.out.println("Enter the name of the team to view its match records:");
+        String teamName = input.next();
+        Team selectedTeam = findTeamByName(teams, teamName);
+
+        if (selectedTeam == null) {
+            System.out.println("No team found with the name " + teamName);
+            return;
+        }
+
+        List<Match> teamMatches = matchRecords.getMatchesForTeam(selectedTeam);
+
+        if (teamMatches.isEmpty()) {
+            System.out.println("No match records found for team " + selectedTeam.getTeamName());
+            return;
+        }
+
+        System.out.println("Match records for team " + selectedTeam.getTeamName() + ":");
+        for (Match match : teamMatches) {
+            System.out.println(match.toString());
+        }
+    }
+
+    private void displayTeamList(List<Team> teams) {
+        System.out.println("List of teams:");
+        for (Team team : teams) {
+            System.out.println(team.getTeamName());
+        }
+    }
+
+    // EFFECTS: Returns the team with the given name, or null if no team is found
+    private Team findTeamByName(List<Team> teams, String name) {
+        for (Team team : teams) {
+            if (team.getTeamName().equalsIgnoreCase(name)) {
+                return team;
             }
         }
+        return null;
     }
 
 }
