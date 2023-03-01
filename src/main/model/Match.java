@@ -2,6 +2,7 @@ package model;
 
 import javax.xml.transform.Result;
 
+// represents a match between 2 teams, it contains the match score and produce the result based on the scores
 public class Match {
     private Team homeTeam;
     private Team awayTeam;

@@ -36,10 +36,17 @@ were lost, and **updating the league standing was challenging**.
 
 * As a user, I want to be able to *select a team and view its complete match history*.
 
+
 * As a user, I want to be able to *view all the matches recorded and all the teams added to the league*.
 
 
 * As a user, I want to be able to *create a league standing to see how many points each team has*.
+
+
+* As a user, I want to be able to *save the match scores and teams added I added to the file (if I choose to)*.
+
+
+* As a user, I want to be able to *load all the match scores and teams I saved in the file(if I choose to)*.
 
 
 ## Reference 

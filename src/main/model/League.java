@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+// Represents a league made of >= 2 teams and produce a standing table based on the number of points.
 public class League {
     private List<Team> league;
 

@@ -419,6 +419,12 @@ public class TeamTest {
     void testUnrecognizedResult() {
         assertThrows(IllegalArgumentException.class, () -> team.updatePoints(Team.Result.UNRECOGNIZED));
     }
+
+
+//    @Test
+//    void testUpdatePointsWithNullResult() {
+//        assertThrows(NullPointerException.class, () -> team.updatePoints(null));
+//    }
 }
 
 

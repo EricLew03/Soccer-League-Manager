@@ -1,5 +1,6 @@
 package model;
 
+// represents a team which contains the stats like matches played, wins, losses and points.
 public class Team {
     private String teamName;
     private int matchesPlayed;
@@ -44,9 +45,6 @@ public class Team {
                 throw new IllegalArgumentException("Result not recognized.");
         }
     }
-
-
-
 
 
     // MODIFIES: this

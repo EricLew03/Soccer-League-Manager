@@ -4,6 +4,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+// represents the all the matches added
 public class MatchRecords {
     private List<Match> matchRecords;
 
