@@ -1,11 +1,15 @@
 package model;
 
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 // represents the all the matches added
-public class MatchRecords {
+public class MatchRecords implements Writable {
     private List<Match> matchRecords;
 
     // EFFECTS: constructs an empty list of matches
@@ -33,5 +37,23 @@ public class MatchRecords {
             }
         }
         return matchesForTeam;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("matches", matchesToJson());
+
+        return json;
+    }
+
+    // EFFECTS : returns the matches in this match records as a JSON array
+    private JSONArray matchesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Match m : matchRecords) {
+            jsonArray.put((m.toJson()));
+        }
+        return jsonArray;
     }
 }

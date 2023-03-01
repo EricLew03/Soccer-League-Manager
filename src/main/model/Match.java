@@ -1,9 +1,12 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 import javax.xml.transform.Result;
 
 // represents a match between 2 teams, it contains the match score and produce the result based on the scores
-public class Match {
+public class Match implements Writable {
     private Team homeTeam;
     private Team awayTeam;
     private int homeGoals;
@@ -41,7 +44,6 @@ public class Match {
     }
 
 
-
     // EFFECTS : Returns the home team
     public Team getHomeTeam() {
         return homeTeam;
@@ -52,9 +54,32 @@ public class Match {
         return awayTeam;
     }
 
+
+    // EFFECTS : Returns the home goals
+    public int getHomeGoals() {
+        return homeGoals;
+    }
+
+    // EFFECTS: Returns the away goals
+    public int getAwayGoals() {
+        return awayGoals;
+    }
+
+
     // EFFECTS: Returns a string representation of the match
     @Override
     public String toString() {
         return homeTeam.getTeamName() + " " + homeGoals + " - " + awayGoals + " " + awayTeam.getTeamName();
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("homeTeam",homeTeam);
+        json.put("awayTeam", awayTeam);
+        json.put("homeGoals", homeGoals);
+        json.put("awayGoals", awayGoals);
+
+        return json;
     }
 }

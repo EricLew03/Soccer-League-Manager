@@ -51,6 +51,18 @@ public class MatchTest {
     }
 
     @Test
+    public void testGetHomeGoals() {
+        match.updateResult(2, 1);
+        assertEquals(2, match.getHomeGoals());
+    }
+
+    @Test
+    public void testGetAwayGoals() {
+        match.updateResult(2, 1);
+        assertEquals(1, match.getAwayGoals());
+    }
+
+    @Test
     public void testToString() {
         match.updateResult(2, 1);
         assertEquals("Home Team 2 - 1 Away Team", match.toString());

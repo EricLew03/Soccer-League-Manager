@@ -1,13 +1,18 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // represents a team which contains the stats like matches played, wins, losses and points.
-public class Team {
+public class Team implements Writable {
     private String teamName;
     private int matchesPlayed;
     private int wins;
     private int draws;
     private int losses;
     private int points;
+
+
 
     public enum Result {
         WIN, LOSS, DRAW,  UNRECOGNIZED
@@ -95,6 +100,18 @@ public class Team {
     // EFFECTS: returns the number of draws
     public int getDraws() {
         return draws;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", teamName);
+        json.put("played", matchesPlayed);
+        json.put("wins", wins);
+        json.put("draws", draws);
+        json.put("losses", losses);
+        json.put("points", points);
+        return json;
     }
 }
 

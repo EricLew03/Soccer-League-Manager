@@ -1,11 +1,15 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 // Represents a league made of >= 2 teams and produce a standing table based on the number of points.
-public class League {
+public class League implements Writable {
     private List<Team> league;
 
     // EFFECTS: Constructs a soccer league with an empty list of teams
@@ -57,5 +61,24 @@ public class League {
         }
         return standings;
     }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("Teams", teamsToJson());
+
+        return json;
+    }
+
+    // EFFECTS : returns the matches in this match records as a JSON array
+    private JSONArray teamsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Team t : league) {
+            jsonArray.put((t.toJson()));
+        }
+        return jsonArray;
+    }
 }
+
 
