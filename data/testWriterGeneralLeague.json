@@ -1,0 +1,26 @@
+{"league": [
+    {
+        "wins": 2,
+        "name": "AAA",
+        "draws": 0,
+        "losses": 0,
+        "played": 2,
+        "points": 6
+    },
+    {
+        "wins": 0,
+        "name": "BBB",
+        "draws": 0,
+        "losses": 1,
+        "played": 1,
+        "points": 0
+    },
+    {
+        "wins": 0,
+        "name": "CCC",
+        "draws": 0,
+        "losses": 1,
+        "played": 1,
+        "points": 0
+    }
+]}

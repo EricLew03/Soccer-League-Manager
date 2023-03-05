@@ -17,14 +17,13 @@ public class JsonReader {
     private String leagueSource;
     private String matchSource;
 
-
     // EFFECTS: constructs reader to read from source file
     public JsonReader(String leagueSource, String matchSource) {
         this.leagueSource = leagueSource;
         this.matchSource = matchSource;
     }
 
-    // EFFECTS: reads workroom from file and returns it;
+    // EFFECTS: reads league from file and returns it;
     // throws IOException if an error occurs reading data from file
     public League readLeague() throws IOException {
         String jsonData = readFile(leagueSource);
@@ -32,34 +31,32 @@ public class JsonReader {
         return parseLeague(jsonObject);
     }
 
-    // EFFECTS: reads workroom from file and returns it;
+    // EFFECTS: reads match records from file and returns it;
     // throws IOException if an error occurs reading data from file
-    public MatchRecords readMatches() throws IOException {
+    public MatchRecords readMatches(League league) throws IOException {
         String jsonData = readFile(matchSource);
         JSONObject jsonObject = new JSONObject(jsonData);
-        return parseMatches(jsonObject);
+        return parseMatches(jsonObject, league);
     }
 
     // EFFECTS: reads source file as string and returns it
     private String readFile(String source) throws IOException {
         StringBuilder contentBuilder = new StringBuilder();
-
         try (Stream<String> stream = Files.lines(Paths.get(source), StandardCharsets.UTF_8)) {
             stream.forEach(s -> contentBuilder.append(s));
         }
-
         return contentBuilder.toString();
     }
 
-    // EFFECTS: parses workroom from JSON object and returns it
+    // EFFECTS: parses league from JSON object and returns it
     public League parseLeague(JSONObject jsonObject) {
         League league = new League();
         addTeams(league, jsonObject);
         return league;
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
+    // MODIFIES: league
+    // EFFECTS: parses teams from JSON object and adds them to league
     private void addTeams(League league, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("league");
         for (Object json : jsonArray) {
@@ -68,8 +65,8 @@ public class JsonReader {
         }
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingy from JSON object and adds it to workroom
+    // MODIFIES: league
+    // EFFECTS: parses team from JSON object and adds it to league
     private void addTeam(League league, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         Integer played = jsonObject.getInt("played");
@@ -81,42 +78,39 @@ public class JsonReader {
         Team team = new Team(name);
         team.setMatchesPlayed(played);
         team.setWins(wins);
-        team.setLosses(losses);;
+        team.setLosses(losses);
         team.setDraws(draws);
-        team.setPoints(points);;
+        team.setPoints(points);
         league.addTeam(team);
     }
 
-    // EFFECTS: parses workroom from JSON object and returns it
-    private MatchRecords parseMatches(JSONObject jsonObject) throws IOException {
+    // EFFECTS: parses match records from JSON object and returns it
+    private MatchRecords parseMatches(JSONObject jsonObject, League league) throws IOException {
         MatchRecords matchRecords = new MatchRecords();
-        addMatches(matchRecords, jsonObject);
+        addMatches(matchRecords, jsonObject, league);
         return matchRecords;
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
-    private void addMatches(MatchRecords matches, JSONObject jsonObject) throws IOException {
+    // MODIFIES: matchRecords
+    // EFFECTS: parses matches from JSON object and adds them to matchRecords
+    private void addMatches(MatchRecords matchRecords, JSONObject jsonObject, League league) throws IOException {
         JSONArray jsonArray = jsonObject.getJSONArray("matches");
         for (Object json : jsonArray) {
             JSONObject nextMatch = (JSONObject) json;
-            addMatch(matches, nextMatch);
+            addMatch(matchRecords, nextMatch, league);
         }
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingy from JSON object and adds it to workroom
-    private void addMatch(MatchRecords matches, JSONObject jsonObject) throws IOException {
-        String homeTeam = jsonObject.getString("homeTeam");
-        String awayTeam = jsonObject.getString("awayTeam");
+    // MODIFIES: matches
+    // EFFECTS: parses match from JSON object and adds it to matches
+    private void addMatch(MatchRecords matches, JSONObject jsonObject, League league) throws IOException {
+        String homeTeamName = jsonObject.getString("homeTeam");
+        String awayTeamName = jsonObject.getString("awayTeam");
         Integer homeGoals = jsonObject.getInt("homeGoals");
         Integer awayGoals = jsonObject.getInt("awayGoals");
 
-        JsonReader reader = new JsonReader(leagueSource, matchSource);
-        League league = reader.readLeague();
-
-        Team home = league.findTeam(homeTeam);
-        Team away = league.findTeam(awayTeam);
+        Team home = league.getTeamByName(homeTeamName);
+        Team away = league.getTeamByName(awayTeamName);
 
         Match match = new Match(home, away);
         match.changeHomeScore(homeGoals);
@@ -124,6 +118,4 @@ public class JsonReader {
 
         matches.addMatch(match);
     }
-
 }
-

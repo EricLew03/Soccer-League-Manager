@@ -15,9 +15,9 @@ public class JsonTest {
         assertEquals(points, team.getPoints());
     }
 
-    protected void checkMatch(Team homeTeam, Team awayTeam, int homeGoals, int awayGoals, Match match) {
-        assertEquals(homeTeam, match.getHomeTeam());
-        assertEquals(awayTeam, match.getAwayTeam());
+    protected void checkMatch(String homeTeam, String awayTeam, int homeGoals, int awayGoals, Match match) {
+        assertEquals(homeTeam, match.getHomeTeam().getTeamName());
+        assertEquals(awayTeam, match.getAwayTeam().getTeamName());
         assertEquals(homeGoals, match.getHomeGoals());
         assertEquals(awayGoals, match.getAwayGoals());
     }

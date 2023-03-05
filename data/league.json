@@ -1,15 +1,23 @@
 {"league": [
     {
-        "wins": 2,
-        "name": "eric",
-        "draws": 0,
+        "wins": 1,
+        "name": "bbb",
+        "draws": 1,
         "losses": 0,
         "played": 2,
-        "points": 6
+        "points": 4
+    },
+    {
+        "wins": 1,
+        "name": "ccc",
+        "draws": 1,
+        "losses": 0,
+        "played": 2,
+        "points": 4
     },
     {
         "wins": 0,
-        "name": "a",
+        "name": "aaa",
         "draws": 0,
         "losses": 2,
         "played": 2,

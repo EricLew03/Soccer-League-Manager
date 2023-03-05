@@ -29,14 +29,19 @@ public class League implements Writable {
         return new ArrayList<>(league);
     }
 
-    // EFFECTS: Returns the team in the league with the given team name, or null if no such team exists.
-    public Team findTeam(String teamName) {
+
+    // EFFECTS : returns the number of teams in the league
+    public Integer numTeam() {
+        return league.size();
+    }
+
+    public Team getTeamByName(String teamName) {
         for (Team team : league) {
             if (team.getTeamName().equals(teamName)) {
                 return team;
             }
         }
-        return null;
+        return null; // if team with given name not found
     }
 
 

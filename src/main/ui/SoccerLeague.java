@@ -29,6 +29,7 @@ public class SoccerLeague {
         input = new Scanner(System.in);
         input.useDelimiter("\n");
         jsonWriter = new JsonWriter(LEAGUE_STORE,MATCH_STORE);
+        jsonReader = new JsonReader(LEAGUE_STORE, MATCH_STORE);
         runLeague();
     }
 
@@ -86,6 +87,7 @@ public class SoccerLeague {
                 break;
             case "l":
                 load();
+                break;
             default:
                 System.out.println("Selection not valid...");
                 break;
@@ -328,28 +330,13 @@ public class SoccerLeague {
             System.out.println("Error while closing file: " + LEAGUE_STORE + " or " + MATCH_STORE);
         }
     }
-//    // EFFECTS: saves the workroom to file
-//    private void save() {
-//        try {
-//            jsonWriter.open();
-//            jsonWriter.writeLeague(league);
-//            jsonWriter.writeMatch(matchRecords);
-//            jsonWriter.close();
-//            System.out.println("League saved " + " to " + LEAGUE_STORE);
-//            System.out.println("Matches saved " + " to " + MATCH_STORE);
-//        } catch (FileNotFoundException e) {
-//            System.out.println("Unable to write to file: " + LEAGUE_STORE);
-//            System.out.println("Unable to write to file: " + MATCH_STORE);
-//
-//        }
-//    }
 
     // MODIFIES: this
     // EFFECTS: loads workroom from file
     private void load() {
         try {
             league = jsonReader.readLeague();
-            matchRecords = jsonReader.readMatches();
+            matchRecords = jsonReader.readMatches(league);
             System.out.println("League loaded " + " from " + LEAGUE_STORE);
             System.out.println("League loaded " + " from " + MATCH_STORE);
         } catch (IOException e) {

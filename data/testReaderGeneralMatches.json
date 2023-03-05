@@ -1,0 +1,14 @@
+{"matches": [
+  {
+    "awayTeam": "bbb",
+    "homeTeam": "aaa",
+    "homeGoals": 1,
+    "awayGoals": 2
+  },
+  {
+    "awayTeam": "aaa",
+    "homeTeam": "ccc",
+    "homeGoals": 2,
+    "awayGoals": 1
+  }
+]}

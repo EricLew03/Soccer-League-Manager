@@ -17,6 +17,11 @@ public class MatchRecords implements Writable {
         this.matchRecords = new ArrayList<>();
     }
 
+    // EFFECTS : return the number of matches recorded
+    public Integer numMatches() {
+        return matchRecords.size();
+    }
+
     // MODIFIES: this
     // EFFECTS: adds the given match to the list of matches
     public void addMatch(Match match) {
@@ -28,6 +33,7 @@ public class MatchRecords implements Writable {
         return matchRecords;
     }
 
+
     // EFFECTS: returns a list of all matches involving the given team
     public List<Match> getMatchesForTeam(Team team) {
         List<Match> matchesForTeam = new ArrayList<>();
@@ -37,6 +43,18 @@ public class MatchRecords implements Writable {
             }
         }
         return matchesForTeam;
+    }
+
+    public List<Match> getMatchRecordsForTeam(Team team) {
+        List<Match> teamMatches = new ArrayList<>();
+
+        for (Match match : getMatchRecords()) {
+            if (match.getHomeTeam().equals(team) || match.getAwayTeam().equals(team)) {
+                teamMatches.add(match);
+            }
+        }
+
+        return teamMatches;
     }
 
     @Override
