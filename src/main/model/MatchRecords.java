@@ -45,18 +45,6 @@ public class MatchRecords implements Writable {
         return matchesForTeam;
     }
 
-    public List<Match> getMatchRecordsForTeam(Team team) {
-        List<Match> teamMatches = new ArrayList<>();
-
-        for (Match match : getMatchRecords()) {
-            if (match.getHomeTeam().equals(team) || match.getAwayTeam().equals(team)) {
-                teamMatches.add(match);
-            }
-        }
-
-        return teamMatches;
-    }
-
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

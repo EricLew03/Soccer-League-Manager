@@ -32,29 +32,16 @@ public class JsonWriter {
     // MODIFIES: this
     // EFFECTS: writes JSON representation of league to file
     public void writeLeague(League league) {
-        try {
-            if (league == null) {
-                throw new IllegalArgumentException("Cannot write null league.");
-            }
-            JSONObject json = league.toJson();
-            saveLeagueToFile(json.toString(TAB));
-        } catch (Exception e) {
-            System.out.println("Error writing league to file: " + e.getMessage());
-        }
+        JSONObject json = league.toJson();
+        saveLeagueToFile(json.toString(TAB));
     }
 
     // MODIFIES: this
     // EFFECTS: writes JSON representation of match records to file
     public void writeMatch(MatchRecords matches) {
-        try {
-            if (matches == null) {
-                throw new IllegalArgumentException("Cannot write null matches.");
-            }
-            JSONObject json = matches.toJson();
-            saveMatchToFile(json.toString(TAB));
-        } catch (Exception e) {
-            System.out.println("Error writing matches to file: " + e.getMessage());
-        }
+        JSONObject json = matches.toJson();
+        saveMatchToFile(json.toString(TAB));
+
     }
 
     // MODIFIES: this

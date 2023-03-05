@@ -55,6 +55,18 @@ public class MatchTest {
         match.updateResult(2, 1);
         assertEquals(2, match.getHomeGoals());
     }
+    @Test
+    public void changeHomeScore() {
+        match.changeHomeScore(1);
+        assertEquals(1, match.getHomeGoals());
+    }
+
+    @Test
+    public void changeAwayScore() {
+        match.changeAwayScore(2);
+        assertEquals(2, match.getAwayGoals());
+    }
+
 
     @Test
     public void testGetAwayGoals() {

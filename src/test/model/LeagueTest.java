@@ -63,6 +63,19 @@ public class LeagueTest {
     }
 
     @Test
+    public void testGetTeamByName() {
+        Team testTeam = league.getTeamByName("Team 1");
+        Team testTeam2 = league.getTeamByName("teeee");
+        assertEquals(team1, testTeam);
+        assertEquals(null, testTeam2);
+    }
+
+    @Test
+    public void testNumTeam() {
+        Integer A = league.numTeam() ;
+        assertEquals(3,A);
+    }
+    @Test
     public void testSamePoints() {
         Match match1 = new Match(team1, team2);
         Match match2 = new Match(team2, team3);

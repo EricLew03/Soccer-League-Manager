@@ -27,6 +27,10 @@ class JsonWriterTest extends JsonTest {
     }
 
     @Test
+    void testEmptyLeague() {
+    }
+
+    @Test
     void testWriterEmptyWorkroom() {
         try {
             League league = new League();
