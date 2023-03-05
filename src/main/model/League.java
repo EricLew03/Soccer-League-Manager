@@ -29,6 +29,16 @@ public class League implements Writable {
         return new ArrayList<>(league);
     }
 
+    // EFFECTS: Returns the team in the league with the given team name, or null if no such team exists.
+    public Team findTeam(String teamName) {
+        for (Team team : league) {
+            if (team.getTeamName().equals(teamName)) {
+                return team;
+            }
+        }
+        return null;
+    }
+
 
     // REQUIRES: The number of teams in the league must be at least 2
     // MODIFIES: this
@@ -65,7 +75,7 @@ public class League implements Writable {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("Teams", teamsToJson());
+        json.put("league", teamsToJson());
 
         return json;
     }

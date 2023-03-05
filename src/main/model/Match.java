@@ -24,6 +24,22 @@ public class Match implements Writable {
         this.result = null;
     }
 
+    // REQUIRES: homeGoals is a non-negative integer
+    // MODIFIES: this
+    // EFFECTS: Updates the score of the home team
+    public void changeHomeScore(int homeGoals) {
+        this.homeGoals = homeGoals;
+    }
+
+
+    // REQUIRES: awayGoals is a non-negative integer
+    // MODIFIES: this
+    // EFFECTS: Updates the score of the away team
+    public void changeAwayScore(int awayGoals) {
+        this.awayGoals = awayGoals;
+    }
+
+
     // REQUIRES: homeGoals and awayGoals are non-negative integers
     // MODIFIES: this, homeTeam, awayTeam
     // EFFECTS: Updates the result of the match and updates the points
@@ -75,8 +91,8 @@ public class Match implements Writable {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("homeTeam",homeTeam);
-        json.put("awayTeam", awayTeam);
+        json.put("homeTeam",homeTeam.getTeamName());
+        json.put("awayTeam", awayTeam.getTeamName());
         json.put("homeGoals", homeGoals);
         json.put("awayGoals", awayGoals);
 

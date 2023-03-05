@@ -3,6 +3,8 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
+import java.util.List;
+
 // represents a team which contains the stats like matches played, wins, losses and points.
 public class Team implements Writable {
     private String teamName;
@@ -11,7 +13,11 @@ public class Team implements Writable {
     private int draws;
     private int losses;
     private int points;
-
+    private List<Match> matchRecord;
+    /*
+    change so that each team will store the match records
+    so we will need to save only the teams
+     */
 
 
     public enum Result {
@@ -52,6 +58,7 @@ public class Team implements Writable {
     }
 
 
+
     // MODIFIES: this
     // EFFECTS: increments the number of wins and points
     public void win() {
@@ -71,6 +78,38 @@ public class Team implements Writable {
         draws++;
         points += 1;
     }
+
+    // MODIFIES: this
+    // EFFECTS : change the number of matches played to the number input
+    public void setMatchesPlayed(int played) {
+        this.matchesPlayed = played;
+    }
+
+    // MODIFIES: this
+    // EFFECTS : change the number of wins to the number input
+    public void setWins(int wins) {
+        this.wins = wins;
+    }
+
+    // MODIFIES: this
+    // EFFECTS : change the number of losses to the number input
+    public void setLosses(int losses) {
+        this.losses = losses;
+    }
+
+    // MODIFIES: this
+    // EFFECTS : change the number of draws to the number input
+    public void setDraws(int draws) {
+        this.draws = draws;
+    }
+
+    // MODIFIES: this
+    // EFFECTS : change the number of points to the number input
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+
 
     // EFFECTS: returns the team name
     public String getTeamName() {

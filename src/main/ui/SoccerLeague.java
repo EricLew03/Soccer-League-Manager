@@ -4,6 +4,8 @@ import model.Match;
 import model.MatchRecords;
 import model.Team;
 import model.League;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
 import java.util.List;
 import java.util.Scanner;
@@ -13,6 +15,8 @@ public class SoccerLeague {
     private MatchRecords matchRecords;
     private League league;
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: runs the soccer league application
     public SoccerLeague() {
