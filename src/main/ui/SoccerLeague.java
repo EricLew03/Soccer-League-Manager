@@ -7,11 +7,15 @@ import model.League;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 // Soccer League application
 public class SoccerLeague {
+    private static final String LEAGUE_STORE = "./data/league.json";
+    private static final String MATCH_STORE = "./data/match.json";
     private MatchRecords matchRecords;
     private League league;
     private Scanner input;
@@ -24,6 +28,7 @@ public class SoccerLeague {
         league = new League();
         input = new Scanner(System.in);
         input.useDelimiter("\n");
+        jsonWriter = new JsonWriter(LEAGUE_STORE,MATCH_STORE);
         runLeague();
     }
 
@@ -53,7 +58,9 @@ public class SoccerLeague {
         System.out.println("\nSelect from:");
         System.out.println("\tm -> match options");
         System.out.println("\tt -> team options");
-        System.out.println("\tl -> league options");
+        System.out.println("\tp -> league standing");
+        System.out.println("\ts -> save league to file");
+        System.out.println("\tl -> load league from file");
         System.out.println("\te -> exit");
         System.out.print("Enter your selection: ");
     }
@@ -68,12 +75,17 @@ public class SoccerLeague {
             case "t":
                 doTeam();
                 break;
-            case "l":
+            case "p":
                 List<String> standings = league.getStandings();
                 for (String row : standings) {
                     System.out.println(row);
                 }
                 break;
+            case "s":
+                save();
+                break;
+            case "l":
+                load();
             default:
                 System.out.println("Selection not valid...");
                 break;
@@ -302,6 +314,51 @@ public class SoccerLeague {
         return null;
     }
 
+    private void save() {
+        try {
+            jsonWriter.open();
+            jsonWriter.writeLeague(league);
+            jsonWriter.writeMatch(matchRecords);
+            jsonWriter.close();
+            System.out.println("League saved to " + LEAGUE_STORE);
+            System.out.println("Matches saved to " + MATCH_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + LEAGUE_STORE + " or " + MATCH_STORE);
+        } catch (IOException e) {
+            System.out.println("Error while closing file: " + LEAGUE_STORE + " or " + MATCH_STORE);
+        }
+    }
+//    // EFFECTS: saves the workroom to file
+//    private void save() {
+//        try {
+//            jsonWriter.open();
+//            jsonWriter.writeLeague(league);
+//            jsonWriter.writeMatch(matchRecords);
+//            jsonWriter.close();
+//            System.out.println("League saved " + " to " + LEAGUE_STORE);
+//            System.out.println("Matches saved " + " to " + MATCH_STORE);
+//        } catch (FileNotFoundException e) {
+//            System.out.println("Unable to write to file: " + LEAGUE_STORE);
+//            System.out.println("Unable to write to file: " + MATCH_STORE);
+//
+//        }
+//    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void load() {
+        try {
+            league = jsonReader.readLeague();
+            matchRecords = jsonReader.readMatches();
+            System.out.println("League loaded " + " from " + LEAGUE_STORE);
+            System.out.println("League loaded " + " from " + MATCH_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + LEAGUE_STORE);
+            System.out.println("Unable to read from file: " + MATCH_STORE);
+
+        }
+
+    }
 }
 
 

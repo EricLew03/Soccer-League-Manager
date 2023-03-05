@@ -1,0 +1,18 @@
+{"league": [
+    {
+        "wins": 2,
+        "name": "eric",
+        "draws": 0,
+        "losses": 0,
+        "played": 2,
+        "points": 6
+    },
+    {
+        "wins": 0,
+        "name": "a",
+        "draws": 0,
+        "losses": 2,
+        "played": 2,
+        "points": 0
+    }
+]}

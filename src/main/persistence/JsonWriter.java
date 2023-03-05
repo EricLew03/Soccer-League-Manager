@@ -10,8 +10,8 @@ import java.io.PrintWriter;
 
 public class JsonWriter {
     private static final int TAB = 4;
-    private PrintWriter writer;
-    private PrintWriter writer2;
+    private PrintWriter leagueWriter;
+    private PrintWriter matchWriter;
     private String leagueDestination;
     private String matchDestination;
 
@@ -21,40 +21,58 @@ public class JsonWriter {
         this.matchDestination = matchDestination;
     }
 
-
     // MODIFIES: this
     // EFFECTS: opens writer; throws FileNotFoundException if destination file cannot
     // be opened for writing
     public void open() throws FileNotFoundException {
-        writer = new PrintWriter(new File(leagueDestination));
-        writer2 = new PrintWriter(new File(matchDestination));
+        leagueWriter = new PrintWriter(new File(leagueDestination));
+        matchWriter = new PrintWriter(new File(matchDestination));
     }
 
     // MODIFIES: this
-    // EFFECTS: writes JSON representation of workroom to file
+    // EFFECTS: writes JSON representation of league to file
     public void writeLeague(League league) {
-        JSONObject json = league.toJson();
-        saveToFile(json.toString(TAB));
+        try {
+            if (league == null) {
+                throw new IllegalArgumentException("Cannot write null league.");
+            }
+            JSONObject json = league.toJson();
+            saveLeagueToFile(json.toString(TAB));
+        } catch (Exception e) {
+            System.out.println("Error writing league to file: " + e.getMessage());
+        }
     }
 
     // MODIFIES: this
-    // EFFECTS: writes JSON representation of workroom to file
+    // EFFECTS: writes JSON representation of match records to file
     public void writeMatch(MatchRecords matches) {
-        JSONObject json = matches.toJson();
-        saveToFile(json.toString(TAB));
+        try {
+            if (matches == null) {
+                throw new IllegalArgumentException("Cannot write null matches.");
+            }
+            JSONObject json = matches.toJson();
+            saveMatchToFile(json.toString(TAB));
+        } catch (Exception e) {
+            System.out.println("Error writing matches to file: " + e.getMessage());
+        }
     }
 
     // MODIFIES: this
     // EFFECTS: closes writer
     public void close() {
-        writer.close();
-        writer2.close();
+        leagueWriter.close();
+        matchWriter.close();
     }
 
     // MODIFIES: this
-    // EFFECTS: writes string to file
-    private void saveToFile(String json) {
-        writer.print(json);
-        writer2.print(json);
+    // EFFECTS: writes string to league file
+    private void saveLeagueToFile(String json) {
+        leagueWriter.print(json);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: writes string to match file
+    private void saveMatchToFile(String json) {
+        matchWriter.print(json);
     }
 }
