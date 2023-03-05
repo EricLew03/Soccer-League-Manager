@@ -35,6 +35,8 @@ public class League implements Writable {
         return league.size();
     }
 
+    // EFFECTS : return the team that has the given name, return null there is
+    //           no team with the given name
     public Team getTeamByName(String teamName) {
         for (Team team : league) {
             if (team.getTeamName().equals(teamName)) {
@@ -85,7 +87,7 @@ public class League implements Writable {
         return json;
     }
 
-    // EFFECTS : returns the matches in this match records as a JSON array
+    // EFFECTS : returns the teams in this league as a JSON array
     private JSONArray teamsToJson() {
         JSONArray jsonArray = new JSONArray();
 

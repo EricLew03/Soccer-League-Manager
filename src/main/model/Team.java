@@ -3,7 +3,6 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
-import java.util.List;
 
 // represents a team which contains the stats like matches played, wins, losses and points.
 public class Team implements Writable {
@@ -13,11 +12,6 @@ public class Team implements Writable {
     private int draws;
     private int losses;
     private int points;
-    private List<Match> matchRecord;
-    /*
-    change so that each team will store the match records
-    so we will need to save only the teams
-     */
 
 
     public enum Result {

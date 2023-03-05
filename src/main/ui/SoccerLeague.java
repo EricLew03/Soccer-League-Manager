@@ -23,7 +23,7 @@ public class SoccerLeague {
     private JsonReader jsonReader;
 
     // EFFECTS: runs the soccer league application
-    public SoccerLeague() {
+    public SoccerLeague() throws FileNotFoundException {
         matchRecords = new MatchRecords();
         league = new League();
         input = new Scanner(System.in);

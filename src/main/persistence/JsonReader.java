@@ -12,7 +12,7 @@ import model.MatchRecords;
 import model.Team;
 import org.json.*;
 
-// Represents a reader that reads workroom from JSON data stored in file
+// Represents a reader that reads the league and matches from JSON data stored in file
 public class JsonReader {
     private String leagueSource;
     private String matchSource;
