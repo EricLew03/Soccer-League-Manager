@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
+// Used json code as template from https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.
+// Represents a writer that write the league and matches from JSON data stored in file
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter leagueWriter;

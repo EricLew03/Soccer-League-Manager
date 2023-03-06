@@ -12,6 +12,7 @@ import model.MatchRecords;
 import model.Team;
 import org.json.*;
 
+// Used json code as template from https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.
 // Represents a reader that reads the league and matches from JSON data stored in file
 public class JsonReader {
     private String leagueSource;
