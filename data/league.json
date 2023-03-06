@@ -1,31 +1,39 @@
 {"league": [
     {
-        "wins": 3,
-        "name": "eric",
+        "wins": 1,
+        "name": "bbb",
         "draws": 0,
         "losses": 0,
-        "played": 3,
-        "points": 9
+        "played": 1,
+        "points": 3
     },
     {
-        "wins": 0,
-        "name": "brandon",
-        "draws": 1,
+        "wins": 1,
+        "name": "cccc",
+        "draws": 0,
+        "losses": 0,
+        "played": 1,
+        "points": 3
+    },
+    {
+        "wins": 1,
+        "name": "ddd",
+        "draws": 0,
         "losses": 1,
         "played": 2,
-        "points": 1
+        "points": 3
     },
     {
         "wins": 0,
-        "name": "derek",
-        "draws": 1,
+        "name": "aaa",
+        "draws": 0,
         "losses": 1,
-        "played": 2,
-        "points": 1
+        "played": 1,
+        "points": 0
     },
     {
         "wins": 0,
-        "name": "jeff",
+        "name": "ksdmk",
         "draws": 0,
         "losses": 1,
         "played": 1,

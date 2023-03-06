@@ -1,26 +1,20 @@
 {"matches": [
     {
-        "awayTeam": "derek",
-        "homeTeam": "eric",
-        "homeGoals": 10,
+        "awayTeam": "bbb",
+        "homeTeam": "aaa",
+        "homeGoals": 1,
+        "awayGoals": 2
+    },
+    {
+        "awayTeam": "ddd",
+        "homeTeam": "cccc",
+        "homeGoals": 7,
         "awayGoals": 0
     },
     {
-        "awayTeam": "brandon",
-        "homeTeam": "eric",
-        "homeGoals": 20,
-        "awayGoals": 0
-    },
-    {
-        "awayTeam": "brandon",
-        "homeTeam": "derek",
-        "homeGoals": 0,
-        "awayGoals": 0
-    },
-    {
-        "awayTeam": "jeff",
-        "homeTeam": "eric",
-        "homeGoals": 10,
-        "awayGoals": 0
+        "awayTeam": "ddd",
+        "homeTeam": "ksdmk",
+        "homeGoals": 1,
+        "awayGoals": 2
     }
 ]}
