@@ -11,9 +11,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.List;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.junit.jupiter.api.BeforeEach;
 
 
 
@@ -33,7 +30,7 @@ public class JsonReaderTest extends JsonTest {
         }
 
         @Test
-        void testReaderEmptyLeagueFiles() {
+        void testReaderEmptyFiles() {
             JsonReader reader = new JsonReader("./data/testReaderEmptyLeague.json",
                     "./data/testReaderEmptyMatches.json");
             try {

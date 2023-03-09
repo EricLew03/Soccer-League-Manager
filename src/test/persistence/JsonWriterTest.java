@@ -25,13 +25,9 @@ class JsonWriterTest extends JsonTest {
             // pass
         }
     }
-
+    
     @Test
-    void testEmptyLeague() {
-    }
-
-    @Test
-    void testWriterEmptyWorkroom() {
+    void testWriterEmptyLeagueAndMatches() {
         try {
             League league = new League();
             MatchRecords matches = new MatchRecords();
@@ -54,7 +50,7 @@ class JsonWriterTest extends JsonTest {
     }
 
     @Test
-    void testWriterGeneralWorkroom() {
+    void testWriterGeneralLeagueAndMatches() {
         try {
             League league = new League();
             MatchRecords matches = new MatchRecords();

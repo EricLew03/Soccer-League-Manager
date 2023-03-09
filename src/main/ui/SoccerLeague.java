@@ -299,6 +299,7 @@ public class SoccerLeague {
         }
     }
 
+    // EFFECTS : displays all the teams on the screen
     private void displayTeamList(List<Team> teams) {
         System.out.println("List of teams:");
         for (Team team : teams) {
@@ -316,6 +317,7 @@ public class SoccerLeague {
         return null;
     }
 
+    // EFFECTS : saves the teams and matches to file
     private void save() {
         try {
             jsonWriter.open();
@@ -332,7 +334,7 @@ public class SoccerLeague {
     }
 
     // MODIFIES: this
-    // EFFECTS: loads workroom from file
+    // EFFECTS: loads League and Matches from file
     private void load() {
         try {
             league = jsonReader.readLeague();
