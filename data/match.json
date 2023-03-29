@@ -16,5 +16,11 @@
         "homeTeam": "ksdmk",
         "homeGoals": 1,
         "awayGoals": 2
+    },
+    {
+        "awayTeam": "bbb",
+        "homeTeam": "test",
+        "homeGoals": 1,
+        "awayGoals": 2
     }
 ]}
