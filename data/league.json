@@ -1,34 +1,34 @@
 {"league": [
     {
         "wins": 1,
-        "name": "zz",
-        "draws": 1,
-        "losses": 0,
-        "played": 2,
-        "points": 4
-    },
-    {
-        "wins": 0,
-        "name": "bb",
-        "draws": 1,
-        "losses": 1,
-        "played": 2,
-        "points": 1
-    },
-    {
-        "wins": 0,
-        "name": "aa",
+        "name": "bbb",
         "draws": 0,
         "losses": 0,
-        "played": 0,
+        "played": 1,
+        "points": 3
+    },
+    {
+        "wins": 1,
+        "name": "ccc",
+        "draws": 0,
+        "losses": 0,
+        "played": 1,
+        "points": 3
+    },
+    {
+        "wins": 0,
+        "name": "aaa",
+        "draws": 0,
+        "losses": 1,
+        "played": 1,
         "points": 0
     },
     {
         "wins": 0,
-        "name": "vv",
+        "name": "ddd",
         "draws": 0,
-        "losses": 0,
-        "played": 0,
+        "losses": 1,
+        "played": 1,
         "points": 0
     }
 ]}

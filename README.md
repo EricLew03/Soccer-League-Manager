@@ -55,7 +55,7 @@ were lost, and **updating the league standing was challenging**.
 button in the new panel.
 - You can generate the first required action related to adding Xs to a Y by pressing league button where the teams
 are arranged to the number of points they have.
-- You can generate the second required action related to adding Xs to a Y by pressing the match button followed by
+- You can generate the second required action related to adding Xs to a Y by pressing the team button followed by
 the team records button where you can see the match record of a specific team.
 - You can locate my visual component when starting my application, a splash screen will appear and will 
 disappear when you click anywhere on the screen
