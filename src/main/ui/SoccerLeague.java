@@ -329,8 +329,6 @@ public class SoccerLeague {
             System.out.println("Matches saved to " + MATCH_STORE);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + LEAGUE_STORE + " or " + MATCH_STORE);
-        } catch (IOException e) {
-            System.out.println("Error while closing file: " + LEAGUE_STORE + " or " + MATCH_STORE);
         }
     }
 

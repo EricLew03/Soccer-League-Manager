@@ -1,7 +1,7 @@
 {"league": [
     {
         "wins": 1,
-        "name": "bbb",
+        "name": "Team2",
         "draws": 0,
         "losses": 0,
         "played": 1,
@@ -9,7 +9,15 @@
     },
     {
         "wins": 1,
-        "name": "ccc",
+        "name": "Team3",
+        "draws": 0,
+        "losses": 0,
+        "played": 1,
+        "points": 3
+    },
+    {
+        "wins": 1,
+        "name": "Team6",
         "draws": 0,
         "losses": 0,
         "played": 1,
@@ -17,7 +25,7 @@
     },
     {
         "wins": 0,
-        "name": "aaa",
+        "name": "Team1",
         "draws": 0,
         "losses": 1,
         "played": 1,
@@ -25,7 +33,15 @@
     },
     {
         "wins": 0,
-        "name": "ddd",
+        "name": "Team4",
+        "draws": 0,
+        "losses": 1,
+        "played": 1,
+        "points": 0
+    },
+    {
+        "wins": 0,
+        "name": "Team5",
         "draws": 0,
         "losses": 1,
         "played": 1,

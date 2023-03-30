@@ -22,6 +22,8 @@ public class League implements Writable {
     // EFFECTS: Adds the given team to the league
     public void addTeam(Team team) {
         league.add(team);
+        EventLog.getInstance().logEvent(new Event(team.getTeamName() + " was added to the league"));
+
     }
 
     // EFFECTS:  Returns a List of all teams in the league.
@@ -54,6 +56,17 @@ public class League implements Writable {
     //          If two teams have the same number of points and wins, the team with the name that comes first
     //          alphabetically is ranked higher.
     public List<String> getStandings() {
+        sortTeamsByPoints();
+        List<String> standings = new ArrayList<>();
+        standings.add(getHeaderRow());
+        for (Team team : league) {
+            standings.add(getTeamRow(team));
+        }
+        EventLog.getInstance().logEvent(new Event("The User looked at the league standing"));
+        return standings;
+    }
+
+    private void sortTeamsByPoints() {
         Collections.sort(league, (a, b) -> {
             int pointsA = a.getPoints();
             int pointsB = b.getPoints();
@@ -69,15 +82,19 @@ public class League implements Writable {
                 }
             }
         });
-        List<String> standings = new ArrayList<>();
-        standings.add(String.format("%-25s%-10s%-10s%-10s%-10s%-10s", "Team", "Matches",
-                "Points", "Wins", "Losses","Draws"));
-        for (Team team : league) {
-            standings.add(String.format("%-25s%-10d%-10d%-10d%-10d%-10d", team.getTeamName(),team.getMatchesPlayed(),
-                    team.getPoints(), team.getWins(), team.getLosses(),team.getDraws()));
-        }
-        return standings;
     }
+
+    private String getHeaderRow() {
+        return String.format("%-25s%-10s%-10s%-10s%-10s%-10s", "Team", "Matches",
+                "Points", "Wins", "Losses","Draws");
+    }
+
+    private String getTeamRow(Team team) {
+        return String.format("%-25s%-10d%-10d%-10d%-10d%-10d", team.getTeamName(),team.getMatchesPlayed(),
+                team.getPoints(), team.getWins(), team.getLosses(),team.getDraws());
+    }
+
+
 
     @Override
     public JSONObject toJson() {

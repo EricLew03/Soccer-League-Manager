@@ -62,6 +62,41 @@ disappear when you click anywhere on the screen
 - You can save the state of my application by pressing the save button
 - You can reload the state of my application by pressing the load button.
 
+## Phase 4: Task 2
+The User loaded the saved league
+
+Team2 was added to the league
+
+Team3 was added to the league
+
+Team1 was added to the league
+
+Team4 was added to the league
+
+The User loaded the saved match records
+
+new match between Team1 and Team2 was added
+
+new match between Team3 and Team4 was added
+
+Team5 was added to the league
+
+Team6 was added to the league
+
+The User looked at the match records for Team2
+
+new match between Team5 and Team6 was added
+
+The User looked at the match records
+
+The User looked at the match records for Team5
+
+The User looked at the league standing
+
+The User saved the current league
+
+The User saved the current match records
+
 ## Reference 
 Used code from Teller application to develop my UI
 https://github.students.cs.ubc.ca/CPSC210/TellerApp

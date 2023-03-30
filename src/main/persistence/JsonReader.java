@@ -6,10 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
-import model.League;
-import model.Match;
-import model.MatchRecords;
-import model.Team;
+import model.*;
 import org.json.*;
 
 // Used json code as template from https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.
@@ -27,6 +24,7 @@ public class JsonReader {
     // EFFECTS: reads league from file and returns it;
     // throws IOException if an error occurs reading data from file
     public League readLeague() throws IOException {
+        EventLog.getInstance().logEvent(new Event("The User loaded the saved league"));
         String jsonData = readFile(leagueSource);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseLeague(jsonObject);
@@ -35,6 +33,7 @@ public class JsonReader {
     // EFFECTS: reads match records from file and returns it;
     // throws IOException if an error occurs reading data from file
     public MatchRecords readMatches(League league) throws IOException {
+        EventLog.getInstance().logEvent(new Event("The User loaded the saved match records"));
         String jsonData = readFile(matchSource);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseMatches(jsonObject, league);

@@ -2,23 +2,18 @@ package ui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Match;
-import model.MatchRecords;
-import model.League;
-import model.Team;
+import model.*;
+import model.Event;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
-public class SoccerLeagueGUI extends JFrame implements ActionListener {
+public class SoccerLeagueGUI extends JFrame implements ActionListener, WindowListener {
     private static final String LEAGUE_STORE = "./data/league.json";
     private static final String MATCH_STORE = "./data/match.json";
 
@@ -54,6 +49,7 @@ public class SoccerLeagueGUI extends JFrame implements ActionListener {
         }
         initializeUI();
         displayMenu();
+        this.addWindowListener(this);
     }
 
 
@@ -550,7 +546,51 @@ public class SoccerLeagueGUI extends JFrame implements ActionListener {
         } else if (e.getSource() == loadButton) {
             load();
         } else if (e.getSource() == exitButton) {
+            printLog(EventLog.getInstance());
             System.exit(0);
+        }
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        printLog(EventLog.getInstance());
+
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+
+    }
+
+    // EFFECTS : prints out all the events in the console.
+    public void printLog(EventLog el) {
+        for (Event next : el) {
+            System.out.println(next.getDescription() + "\n");
         }
     }
 }

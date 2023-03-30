@@ -26,10 +26,13 @@ public class MatchRecords implements Writable {
     // EFFECTS: adds the given match to the list of matches
     public void addMatch(Match match) {
         matchRecords.add(match);
+        EventLog.getInstance().logEvent(new Event("new match between "
+                + match.getHomeTeam().getTeamName() + " and " + match.getAwayTeam().getTeamName() + " was added"));
     }
 
     // EFFECTS: returns the list of matches
     public List<Match> getMatchRecords() {
+        EventLog.getInstance().logEvent(new Event("The User looked at the match records"));
         return matchRecords;
     }
 
@@ -42,6 +45,8 @@ public class MatchRecords implements Writable {
                 matchesForTeam.add(match);
             }
         }
+        EventLog.getInstance().logEvent(new Event("The User looked at the match records for "
+                + team.getTeamName()));
         return matchesForTeam;
     }
 
