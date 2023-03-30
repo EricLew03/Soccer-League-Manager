@@ -8,6 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.Match;
@@ -36,6 +37,7 @@ public class SoccerLeagueGUI extends JFrame implements ActionListener {
 
     private JWindow splashScreen;
 
+    // EFFECTS : runs the soccer league app GUI
     public SoccerLeagueGUI() throws FileNotFoundException {
         matchRecords = new MatchRecords();
         league = new League();
@@ -55,6 +57,9 @@ public class SoccerLeagueGUI extends JFrame implements ActionListener {
     }
 
 
+
+    // EFFECTS: Displays a splash screen and adds a mouse listener
+    //          to close the splash screen on mouse click.
     private void splashScreen() {
         splashScreen = new JWindow();
         JLabel splashLabel = new JLabel(new ImageIcon("data/foot.jpg.png"));
@@ -72,10 +77,19 @@ public class SoccerLeagueGUI extends JFrame implements ActionListener {
     }
 
 
-
+    // MODIFIES: this
+    // EFFECTS: Initializes the UI by creating the window, top panel, and button panel.
     private void initializeUI() {
-        // Create a new window for the splash screen
+        createWindow();
+        createTopPanel();
+        createButtonPanel();
+    }
 
+
+    // MODIFIES: this
+    // EFFECTS: Creates the window with a specific title, size, location, and layout.
+    //          Also, creates the main panel and adds it to the window.
+    private void createWindow() {
         setTitle("Soccer League Manager");
         setSize(800, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -86,7 +100,13 @@ public class SoccerLeagueGUI extends JFrame implements ActionListener {
         mainPanel.setBackground(Color.BLACK);
         mainPanel.setLayout(new BorderLayout());
         add(mainPanel);
+    }
 
+
+    // MODIFIES: this, mainPanel
+    // EFFECTS: Creates the top panel with an image and a title, and
+    //          adds it to the main panel.
+    private void createTopPanel() {
         JPanel topPanel = new JPanel();
         topPanel.setBackground(Color.BLACK);
         topPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 30));
@@ -102,7 +122,13 @@ public class SoccerLeagueGUI extends JFrame implements ActionListener {
         titleLabel.setFont(new Font("MV Boli", Font.BOLD, 30));
         titleLabel.setForeground(Color.WHITE);
         topPanel.add(titleLabel);
+    }
 
+
+    // MODIFIES: this, mainPanel
+    // EFFECTS: Creates the button panel with buttons for team, match,
+    //          standings, save, load, and exit. Also, adds it to the main panel.
+    private void createButtonPanel() {
         JPanel buttonPanel = new JPanel(new GridLayout(1, 5, 20, 20));
         buttonPanel.setBackground(Color.BLACK);
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -111,59 +137,42 @@ public class SoccerLeagueGUI extends JFrame implements ActionListener {
         int buttonWidth = 150;
         int buttonHeight = 50;
 
-        teamButton = new JButton("Team");
-        teamButton.addActionListener(this);
-        teamButton.setBackground(Color.DARK_GRAY);
-        teamButton.setForeground(Color.WHITE);
-        teamButton.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
+        teamButton = createButton("Team", buttonWidth, buttonHeight);
+        matchButton = createButton("Match", buttonWidth, buttonHeight);
+        standingsButton = createButton("League", buttonWidth, buttonHeight);
+        saveButton = createButton("Save", buttonWidth, buttonHeight);
+        loadButton = createButton("Load", buttonWidth, buttonHeight);
+        exitButton = createButton("Exit", buttonWidth, buttonHeight);
+
         buttonPanel.add(teamButton);
-
-        matchButton = new JButton("Match");
-        matchButton.addActionListener(this);
-        matchButton.setBackground(Color.DARK_GRAY);
-        matchButton.setForeground(Color.WHITE);
-        matchButton.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
         buttonPanel.add(matchButton);
-
-        standingsButton = new JButton("League");
-        standingsButton.addActionListener(this);
-        standingsButton.setBackground(Color.DARK_GRAY);
-        standingsButton.setForeground(Color.WHITE);
-        standingsButton.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
         buttonPanel.add(standingsButton);
-
-        saveButton = new JButton("Save");
-        saveButton.addActionListener(this);
-        saveButton.setBackground(Color.DARK_GRAY);
-        saveButton.setForeground(Color.WHITE);
-        saveButton.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
         buttonPanel.add(saveButton);
-
-        loadButton = new JButton("Load");
-        loadButton.addActionListener(this);
-        loadButton.setBackground(Color.DARK_GRAY);
-        loadButton.setForeground(Color.WHITE);
-        loadButton.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
         buttonPanel.add(loadButton);
-
-        exitButton = new JButton("Exit");
-        exitButton.addActionListener(this);
-        exitButton.setBackground(Color.DARK_GRAY);
-        exitButton.setForeground(Color.WHITE);
-        exitButton.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
         buttonPanel.add(exitButton);
     }
 
+    // EFFECTS: Creates a button with a given label, width, and height, and
+    //          adds an action listener to it.
+    private JButton createButton(String label, int width, int height) {
+        JButton button = new JButton(label);
+        button.addActionListener(this);
+        button.setBackground(Color.DARK_GRAY);
+        button.setForeground(Color.WHITE);
+        button.setPreferredSize(new Dimension(width, height));
+        return button;
+    }
 
 
-
+    // MODIFIES: this
+    // EFFECTS: Displays the menu by setting the visibility of the window to true.
     private void displayMenu() {
         setVisible(true);
     }
 
+    // EFFECTS: Creates a new JFrame named matchFrame
     private void doMatch() {
-        // Create a new JFrame
-        JFrame matchFrame = new JFrame("Add Match");
+        JFrame matchFrame = new JFrame("Match options");
 
         JLabel addMatchLabel = new JLabel("Select from:");
         JButton addMatchButton = new JButton("Add match");
@@ -187,7 +196,10 @@ public class SoccerLeagueGUI extends JFrame implements ActionListener {
         matchFrame.setVisible(true);
     }
 
-    // EFFECTS: allows the user to add a new match
+    // MODIFIES: matchRecords
+    // EFFECTS: Prompts the user to select a home team and an away team for a new match.
+    //          If there are less than two teams in the league, displays a message dialog stating that there must be at
+    //          least two teams in the league to add a match.
     private void addMatch() {
         List<Team> teams = league.getTeams();
 
@@ -218,12 +230,14 @@ public class SoccerLeagueGUI extends JFrame implements ActionListener {
         while (awayTeam == null || awayTeam == homeTeam) {
             awayTeam = selectTeam();
             if (awayTeam == homeTeam) {
-                JOptionPane.showMessageDialog(this, "The away team cannot be the same as the home team. Please select a different team.");
+                JOptionPane.showMessageDialog(this,
+                        "The away team cannot be the same as the home team. Please select a different team.");
             }
         }
         return awayTeam;
     }
 
+    // MODIFIES : matchRecords
     // EFFECTS: Creates a new Match with the given home and away teams and returns it.
     private Match createMatch(Team homeTeam, Team awayTeam) {
         return new Match(homeTeam, awayTeam);
@@ -255,8 +269,8 @@ public class SoccerLeagueGUI extends JFrame implements ActionListener {
                 JOptionPane.QUESTION_MESSAGE, null, teamNames, teamNames[0]);
         return findTeamByName(selectedTeamName);
     }
-    // EFFECTS: Returns the team in the league with the given teamName, or null if no such team exists.
 
+    // EFFECTS: Returns the team in the league with the given teamName, or null if no such team exists.
     private Team findTeamByName(String teamName) {
         for (Team team : league.getTeams()) {
             if (team.getTeamName().equals(teamName)) {
@@ -288,37 +302,40 @@ public class SoccerLeagueGUI extends JFrame implements ActionListener {
 
 
 
+    // EFFECTS: Creates a new JFrame named teamFrame
     private void doTeam() {
-        JFrame frame = new JFrame("Team Options");
-        JPanel panel = new JPanel(new GridLayout(4, 1));
-        JLabel label = new JLabel("Select from:");
+        JFrame teamFrame = new JFrame("Team Options");
 
+        JLabel selectLabel = new JLabel("Select from:");
         JButton addTeamButton = new JButton("Add Team");
-        addTeamButton.addActionListener(e -> addTeam());
-
-
         JButton viewTeamListButton = new JButton("List of Teams");
-        viewTeamListButton.addActionListener(e -> viewTeamList());
-
-
         JButton viewTeamRecordButton = new JButton("Team Record");
-        viewTeamRecordButton.addActionListener(e -> viewTeamRecord());
-
-
         JButton quitButton = new JButton("Quit");
-        quitButton.addActionListener(e -> frame.dispose());
 
-        panel.add(label);
-        panel.add(addTeamButton);
-        panel.add(viewTeamListButton);
-        panel.add(viewTeamRecordButton);
-        panel.add(quitButton);
+        // add action listeners to the buttons to handle events
+        addTeamButton.addActionListener(e -> addTeam());
+        viewTeamListButton.addActionListener(e -> viewTeamList());
+        viewTeamRecordButton.addActionListener(e -> viewTeamRecord());
+        quitButton.addActionListener(e -> teamFrame.dispose());
 
-        frame.getContentPane().add(panel);
-        frame.pack();
-        frame.setVisible(true);
+        // add the components to the JFrame
+        teamFrame.add(selectLabel);
+        teamFrame.add(addTeamButton);
+        teamFrame.add(viewTeamListButton);
+        teamFrame.add(viewTeamRecordButton);
+        teamFrame.add(quitButton);
+
+        // set the layout manager to arrange the components
+        teamFrame.setLayout(new GridLayout(5, 1));
+        teamFrame.setSize(300, 200);
+        teamFrame.setVisible(true);
     }
 
+
+
+    // MODIFIES : league
+    // EFFECTS : Prompts the user to enter a new team name and creates a new team with that name.
+    //           The new team is added to the league
     private void addTeam() {
         JFrame frame = new JFrame("Add Team");
         JPanel panel = new JPanel(new GridLayout(2, 1));
@@ -347,7 +364,7 @@ public class SoccerLeagueGUI extends JFrame implements ActionListener {
         frame.setVisible(true);
     }
 
-
+    // EFFECTS : Retrieves a list of teams from the League class and displays the team names in a dialog box.
     public void viewTeamList() {
         List<Team> teams = league.getTeams();
         if (teams.isEmpty()) {
@@ -375,6 +392,7 @@ public class SoccerLeagueGUI extends JFrame implements ActionListener {
         }
     }
 
+    // EFFECTS: Prompts the user to select a team and displays that team's match records in a dialog box.
     public void viewTeamRecord() {
         List<Team> teams = league.getTeams();
         if (teams.isEmpty()) {
@@ -382,13 +400,7 @@ public class SoccerLeagueGUI extends JFrame implements ActionListener {
             return;
         }
 
-        String[] teamNames = teams.stream()
-                .map(Team::getTeamName)
-                .toArray(String[]::new);
-
-        String teamName = (String) JOptionPane.showInputDialog(null, "Select team:",
-                "Team Record", JOptionPane.QUESTION_MESSAGE, null, teamNames, teamNames[0]);
-
+        String teamName = selectTeamName(teams);
         if (teamName == null) {
             return;
         }
@@ -396,36 +408,94 @@ public class SoccerLeagueGUI extends JFrame implements ActionListener {
         Team selectedTeam = findTeamByName(teamName);
 
         List<Match> teamMatches = matchRecords.getMatchesForTeam(selectedTeam);
-
         if (teamMatches.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No match records found for team " + selectedTeam.getTeamName());
             return;
         }
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("Match records for team ").append(selectedTeam.getTeamName()).append(":\n");
-
-        for (Match match : teamMatches) {
-            sb.append(match.toString()).append("\n");
-        }
-
-        JOptionPane.showMessageDialog(null, sb.toString());
+        String matchRecords = getMatchRecordsForTeam(selectedTeam, teamMatches);
+        JOptionPane.showMessageDialog(null, matchRecords);
     }
 
+
+    // Effects: displays a dialog box to the user asking them to select a team from the list of Team objects provided,
+    //          and returns the name of the selected team as a String.
+    private String selectTeamName(List<Team> teams) {
+        String[] teamNames = teams.stream().map(Team::getTeamName).toArray(String[]::new);
+        return (String) JOptionPane.showInputDialog(
+                null, "Select team:",
+                "Team Record", JOptionPane.QUESTION_MESSAGE, null, teamNames, teamNames[0]
+        );
+    }
+
+
+    // Effects: constructs a String containing the match records for the given team.
+    private String getMatchRecordsForTeam(Team team, List<Match> matches) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Match records for team ").append(team.getTeamName()).append(":\n");
+        for (Match match : matches) {
+            sb.append(match.toString()).append("\n");
+        }
+        return sb.toString();
+    }
+
+
+    // Effects: creates a new JTextArea object
+    private JTextArea createStandingsArea() {
+        JTextArea standingsArea = new JTextArea(20, 30);
+        standingsArea.setEditable(false);
+        standingsArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 14));
+        return standingsArea;
+    }
+
+    // Effects: iterates over the list of standings, splitting each standing into its component parts and determining
+    //          the maximum length of the part at the specified columnIndex. The maximum length is
+    //          returned as an integer.
+    private int getMaxColumnLength(List<String> standings, int columnIndex) {
+        int maxLength = 0;
+        for (String standing : standings) {
+            String[] parts = standing.split("\\s+");
+            maxLength = Math.max(maxLength, parts[columnIndex].length());
+        }
+        return maxLength;
+    }
+
+    // Effects: formats the given column by left-padding it with spaces until
+    //          its length is equal to maxLength. The resulting String is returned.
+    private String formatColumn(String column, int maxLength) {
+        return String.format("%-" + maxLength + "s", column);
+    }
+
+    // EFFECTS: formats the standing String by padding each column with spaces to match the maximum column length
+    private void addStandingToArea(String standing, List<Integer> maxColumnLengths, JTextArea standingsArea) {
+        String[] parts = standing.split("\\s+");
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < parts.length; i++) {
+            sb.append(formatColumn(parts[i], maxColumnLengths.get(i)));
+            sb.append("  ");
+        }
+        standingsArea.append(sb.toString() + "\n");
+    }
+
+    // Modifies: the GUI by displaying the league standings.
+    // Effects: retrieves the current standings from the league object
     private void displayStandings() {
         List<String> standings = league.getStandings();
+        JTextArea standingsArea = createStandingsArea();
 
-        // Create a new JList to display the standings
-        DefaultListModel<String> model = new DefaultListModel<String>();
-        for (String standing : standings) {
-            model.addElement(standing);
+        // Determine the maximum length of each column
+        List<Integer> maxColumnLengths = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            maxColumnLengths.add(getMaxColumnLength(standings, i));
         }
-        JList<String> standingsList = new JList<String>(model);
-        standingsList.setFont(new Font("Arial", Font.PLAIN, 14));
 
-        // Create a new JScrollPane to display the JList
-        JScrollPane scrollPane = new JScrollPane(standingsList);
-        scrollPane.setPreferredSize(new Dimension(400, 400));
+        // Add the standings to the JTextArea
+        for (String standing : standings) {
+            addStandingToArea(standing, maxColumnLengths, standingsArea);
+        }
+
+        // Create a new JScrollPane to display the JTextArea
+        JScrollPane scrollPane = new JScrollPane(standingsArea);
 
         // Show the standings in a JOptionPane
         JOptionPane.showMessageDialog(
@@ -437,7 +507,7 @@ public class SoccerLeagueGUI extends JFrame implements ActionListener {
     }
 
 
-
+    // Effects: saves the current state of the league and matchRecords objects
     private void save() {
         try {
             jsonWriter.open();
@@ -452,6 +522,10 @@ public class SoccerLeagueGUI extends JFrame implements ActionListener {
         }
     }
 
+
+    // MODIFIES : league , matchrecords
+    // Effects: loads the JSON data from the files specified and sets the corresponding
+    //          fields in the LeagueManagerGUI class
     private void load() {
         try {
             league = jsonReader.readLeague();
@@ -463,6 +537,8 @@ public class SoccerLeagueGUI extends JFrame implements ActionListener {
                     "Load Failed", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+
 
     @Override
     public void actionPerformed(ActionEvent e) {

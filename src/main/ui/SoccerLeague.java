@@ -120,7 +120,8 @@ public class SoccerLeague {
         }
     }
 
-    // MODIFIES: this, matchRecords
+    // REQUIRES: There must be at least two teams in the league.
+    // MODIFIES: this, matchRecords, league
     // EFFECTS: allows the user to add a new match
     private void addMatch() {
         List<Team> teams = league.getTeams();
