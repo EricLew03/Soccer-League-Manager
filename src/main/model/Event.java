@@ -58,10 +58,6 @@ public class Event {
                 this.description.equals(otherEvent.description));
     }
 
-    @Override
-    public int hashCode() {
-        return (HASH_CONSTANT * dateLogged.hashCode() + description.hashCode());
-    }
 
     @Override
     public String toString() {
