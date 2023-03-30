@@ -344,14 +344,11 @@ public class SoccerLeagueGUI extends JFrame implements ActionListener {
 
         JButton addButton = new JButton("Add");
         addButton.addActionListener(e -> {
-            String teamName = textField.getText();
-            if (!teamName.isBlank()) {
+            String teamName = textField.getText(); {
                 Team newTeam = new Team(teamName);
                 league.addTeam(newTeam);
                 JOptionPane.showMessageDialog(frame, "Team added successfully!");
                 frame.dispose();
-            } else {
-                JOptionPane.showMessageDialog(frame, "Team name cannot be blank.");
             }
         });
 
