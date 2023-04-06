@@ -17,6 +17,7 @@ public class SoccerLeagueGUI extends JFrame implements ActionListener, WindowLis
     private static final String LEAGUE_STORE = "./data/league.json";
     private static final String MATCH_STORE = "./data/match.json";
 
+
     private JPanel mainPanel;
     private JButton matchButton;
     private JButton teamButton;

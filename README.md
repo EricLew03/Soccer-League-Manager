@@ -97,7 +97,25 @@ The User saved the current league
 
 The User saved the current match records
 
-## Reference 
+
+## Phase 4: Task 3
+
+<img src="UML_Design-Diagram.png">
+
+To improve the organization of my code, I plan to make changes to my SoccerLeagueGUI class. 
+As it currently stands, the class is responsible for performing multiple tasks, resulting in low cohesion.
+To address this issue, I aim to divide the functionality of the class into several smaller, more focused classes.
+By assigning each class a specific task, I will increase the cohesion of my code, making it more readable, manageable, 
+and reusable.
+
+Currently, my code saves and reads two separate lists, "League" and "MatchRecords", 
+into two distinct JSON files. However, I can  optimize the program by refactoring the code to use a single file for 
+both saving and reading data. By adopting this approach, the program will require less memory and run faster, 
+since it only needs to access a single file to complete the save and load operations.
+
+
+
+### Reference 
 Used code from Teller application to develop my UI
 https://github.students.cs.ubc.ca/CPSC210/TellerApp
 
