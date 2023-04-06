@@ -1,50 +1,42 @@
 {"league": [
     {
         "wins": 1,
-        "name": "Team2",
+        "name": "team1",
         "draws": 0,
+        "losses": 1,
+        "played": 2,
+        "points": 3
+    },
+    {
+        "wins": 0,
+        "name": "team3",
+        "draws": 1,
         "losses": 0,
         "played": 1,
-        "points": 3
+        "points": 1
+    },
+    {
+        "wins": 0,
+        "name": "team4",
+        "draws": 1,
+        "losses": 0,
+        "played": 1,
+        "points": 1
+    },
+    {
+        "wins": 0,
+        "name": "team2",
+        "draws": 0,
+        "losses": 1,
+        "played": 1,
+        "points": 0
     },
     {
         "wins": 1,
-        "name": "Team3",
+        "name": "team5",
         "draws": 0,
         "losses": 0,
         "played": 1,
         "points": 3
-    },
-    {
-        "wins": 1,
-        "name": "Team6",
-        "draws": 0,
-        "losses": 0,
-        "played": 1,
-        "points": 3
-    },
-    {
-        "wins": 0,
-        "name": "Team1",
-        "draws": 0,
-        "losses": 1,
-        "played": 1,
-        "points": 0
-    },
-    {
-        "wins": 0,
-        "name": "Team4",
-        "draws": 0,
-        "losses": 1,
-        "played": 1,
-        "points": 0
-    },
-    {
-        "wins": 0,
-        "name": "Team5",
-        "draws": 0,
-        "losses": 1,
-        "played": 1,
-        "points": 0
     }
 ]}
