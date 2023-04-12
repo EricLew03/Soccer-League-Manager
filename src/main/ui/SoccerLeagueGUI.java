@@ -591,6 +591,7 @@ public class SoccerLeagueGUI extends JFrame implements ActionListener, WindowLis
     // EFFECTS : prints out all the events in the console.
     public void printLog(EventLog el) {
         for (Event next : el) {
+            System.out.println(next.getDate() + "\n");
             System.out.println(next.getDescription() + "\n");
         }
     }

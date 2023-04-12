@@ -65,35 +65,67 @@ disappear when you click anywhere on the screen
 ## Phase 4: Task 2
 The User loaded the saved league
 
-Team2 was added to the league
+Wed Apr 12 13:47:03 PDT 2023
 
-Team3 was added to the league
+team1 was added to the league
 
-Team1 was added to the league
+Wed Apr 12 13:47:03 PDT 2023
 
-Team4 was added to the league
+team3 was added to the league
+
+Wed Apr 12 13:47:03 PDT 2023
+
+team4 was added to the league
+
+Wed Apr 12 13:47:03 PDT 2023
+
+team2 was added to the league
+
+Wed Apr 12 13:47:03 PDT 2023
+
+team5 was added to the league
+
+Wed Apr 12 13:47:03 PDT 2023
 
 The User loaded the saved match records
 
-new match between Team1 and Team2 was added
+Wed Apr 12 13:47:03 PDT 2023
 
-new match between Team3 and Team4 was added
+new match between team1 and team2 was added
 
-Team5 was added to the league
+Wed Apr 12 13:47:03 PDT 2023
+
+new match between team3 and team4 was added
+
+Wed Apr 12 13:47:03 PDT 2023
+
+new match between team5 and team1 was added
+
+Wed Apr 12 13:47:18 PDT 2023
 
 Team6 was added to the league
 
-The User looked at the match records for Team2
+Wed Apr 12 13:47:25 PDT 2023
 
-new match between Team5 and Team6 was added
+The User looked at the match records for team1
+
+Wed Apr 12 13:47:40 PDT 2023
+
+new match between Team6 and team3 was added
+
+Wed Apr 12 13:47:42 PDT 2023
 
 The User looked at the match records
 
-The User looked at the match records for Team5
+Wed Apr 12 13:47:48 PDT 2023
 
 The User looked at the league standing
 
+Wed Apr 12 13:47:51 PDT 2023
+
 The User saved the current league
+
+Wed Apr 12 13:47:51 PDT 2023
 
 The User saved the current match records
 

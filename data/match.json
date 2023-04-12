@@ -16,5 +16,11 @@
         "homeTeam": "team5",
         "homeGoals": 1,
         "awayGoals": 0
+    },
+    {
+        "awayTeam": "team3",
+        "homeTeam": "Team6",
+        "homeGoals": 1,
+        "awayGoals": 2
     }
 ]}
