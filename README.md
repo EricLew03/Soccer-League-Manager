@@ -132,7 +132,7 @@ The User saved the current match records
 
 ## Phase 4: Task 3
 
-<img src="UML_Design-Diagram.png">
+<img src="UML_Design_Diagram.jpg">
 
 To improve the organization of my code, I plan to make changes to my SoccerLeagueGUI class. 
 As it currently stands, the class is responsible for performing multiple tasks, resulting in low cohesion.
