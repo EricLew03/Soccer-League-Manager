@@ -48,7 +48,7 @@ were lost, and **updating the league standing was challenging**.
 
 * As a user, I want to be able to *load all the match scores and teams I saved in the file(if I choose to)*.
 
-## Instructions For Grader
+## Instructions For User
 
 - You can add multiple teams to a league by pressing team button followed by the add team button in the new panel.
 - You can view all the teams added to the league, by pressing the team button followed by the list of teams 
@@ -62,7 +62,7 @@ disappear when you click anywhere on the screen
 - You can save the state of my application by pressing the save button
 - You can reload the state of my application by pressing the load button.
 
-## Phase 4: Task 2
+## Data Logging example
 The User loaded the saved league
 
 Wed Apr 12 13:47:03 PDT 2023
@@ -130,7 +130,7 @@ Wed Apr 12 13:47:51 PDT 2023
 The User saved the current match records
 
 
-## Phase 4: Task 3
+## Future improvement
 
 <img src="UML_Design_Diagram.jpg">
 
